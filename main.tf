@@ -5,6 +5,7 @@ metadata:
     namespace: eeh-platform-dev
 
 spec
+    serviceAccountName: vault-authectication
     replicas:4
         resources:
          limits:
@@ -22,16 +23,17 @@ spec
                   labelselectors:
                     -key: app
 
-
   images:
    application:
    pullSecretRef:
+   ports:
+        -continerPort:8090
 
-dependcies:
-  kafka:
-    bootstrapendpoint:
-    authectication:
-     type:oauth
+    dependcies:
+    kafka:
+        bootstrapendpoint:
+        authectication:
+        type:oauth
 
 
 
