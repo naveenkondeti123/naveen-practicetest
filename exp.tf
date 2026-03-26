@@ -1,6 +1,5 @@
 Kanerika devops inv
 
-
 1.hands on experience on writing docker file.#
 syntax 
 docker/dockerfile:Rawgithub
@@ -63,3 +62,16 @@ Migrating data from on-premises environment to the Azure cloud involves several 
 6. Analytics Service:Performs real-time or batch analytics on event data to generate insights.
 7. Security and Authorization Service:Manages authentication and authorization for event producers and consumers.
 8. Monitoring and Logging Service:Collects logs and metrics for system health and performance monitoring.
+
+-----------------
+🔹Explanation of StatefulSet vs Deployment in AKS
+A Deployment manages stateless applications where pods are identical and interchangeable.
+A StatefulSet manages applications that need:
+a.Persistent storage
+b.Stable identity
+Deployment is used for stateless applications where pods are interchangeable, while StatefulSet is used for stateful applications requiring stable identity, ordered deployment, and persistent storage.
+
+🔹Git vs GitHub
+Git is a version control tool to track code changes, while GitHub is a cloud platform to store and collaborate on Git repositories.
+🔹 Reverse Proxy
+A reverse proxy is a server that sits in front of backend servers and forwards client requests to them, improving security, load balancing, and performance.
