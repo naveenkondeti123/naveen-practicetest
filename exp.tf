@@ -75,3 +75,12 @@ Deployment is used for stateless applications where pods are interchangeable, wh
 Git is a version control tool to track code changes, while GitHub is a cloud platform to store and collaborate on Git repositories.
 🔹 Reverse Proxy
 A reverse proxy is a server that sits in front of backend servers and forwards client requests to them, improving security, load balancing, and performance.
+
+🔹Reconciliation in GitOps(argocd) is the process of continuously ensuring the actual system state matches the desired state defined in Git.
+
+linux
+find files changed in the last 10 minutes in a linux server
+find /path/to/search -type f -mmin -10 (use find command path -type=files and mmin=10m)
+
+telnet is used to test connectivity to a remote host and port.
+netstat is used to display network connections, listening ports, and routing information.
