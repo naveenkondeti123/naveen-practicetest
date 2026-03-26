@@ -1,6 +1,5 @@
 Kanerika devops inv
 
-![alt text](image.png)
 
 1.hands on experience on writing docker file.#
 syntax 
