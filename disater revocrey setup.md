@@ -134,4 +134,9 @@ azure monitor /prometheus and grapahana= metrics of vms servers aks
 azure log analatics/splunk= used to store log collection storing  and log analysis
 dynatrace = user performance monitoring(kafka vms) and tracing 
 
+Kafka, a meaningful SLI is message delivery latency (e.g., 99% latency under 200ms(0.2sec)) and consumer lag. The SLO would be: 99.9% of messages processed within 200ms over a 30-day rolling window. The error budget is then 0.1% — roughly 43 minutes of allowed degradation per month. When we approach budget exhaustion, we'd freeze non-critical deployments and focus on reliability work. In Dynatrace, we'd configure a custom SLO dashboard tracking these metrics with burn rate alerts at 5% budget consumed per hour.
 
+sli is 99% per 200ms/0.2sec
+slo is 99.9% avilability per 0.2 sec for 30 days
+burnrate is 5-10%
+error budget is is o.1% for a month
