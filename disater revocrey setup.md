@@ -119,14 +119,19 @@ Automates quality and operational readiness checks, including compliance with se
 Implements policy as code for infrastructure deployments, enforcing security and compliance requirements in Terraform workflows.
 StrongDM uses Single Sign-On (SSO) with MFA,
 
-1. Dynatrace Implementation for Java and Kafka Monitoring
+1. Dynatrace Implementation for Kafka Monitoring
 Kafka Monitoring:
-Dynatrace OneAgent also detects and monitors Kafka brokers and clients, capturing metrics such as broker health, topic throughput, consumer lag, and partition states.
-Additional Kafka plugin configuration may be applied for more granular insights (e.g., JMX-based custom metrics).
+Dynatrace OneAgent  detects and monitors Kafka brokers and clients, capturing metrics such as broker health, topic throughput, consumer lag, and partition states.
+Additional Kafka plugin configuration may be applied for more granular insights ( JMX-metrics).
 2. SLOS (Service Level Objectives) and SLIs (Service Level Indicators)
 SLI (Service Level Indicator):
 A quantitative metric that measures a specific aspect of service performance (e.g., response time, error rate, message lag).
 SLO (Service Level Objective):
-A target value or threshold for an SLI over a defined time window (e.g., "99.9% of Kafka messages are processed within 1 second over the last 7 days").
+A target value or threshold for an SLI over a defined time window (e.g., "99.9% of Kafka messages are processed within 1 second over the last 7 days" no of request procesed per min).
+
+
+azure monitor /prometheus and grapahana= metrics of vms servers aks
+azure log analatics/splunk= used to store log collection storing  and log analysis
+dynatrace = user performance monitoring(kafka vms) and tracing 
 
 
