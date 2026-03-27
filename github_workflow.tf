@@ -12,7 +12,7 @@ on:
 jobs:
     deploy_terraform_infra_workflow
     enviroment: dev
-    runs-on=humana-internal-cld3
+    runs-on=h umana-internal-cld3
     env:
         GH_TOKEN: ${{ github.token }}
         SPN_CLIENT_ID: ${{ secret.SPN_CLIENT_ID }}
@@ -49,6 +49,11 @@ jobs:
         terraform init
         terraform plan
         terraform apply -auto-approve
+
+
+   
+
+
 
 
 
