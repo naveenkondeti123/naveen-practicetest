@@ -20,12 +20,12 @@ Rto is less than 1hr and rpo is upto 15 mins
 client wants to set up an Azure Landing Zone. What are the key design decisions you would make, and what Azure services would you use?
 tenat root group - top level
         |
-  Platform Management Group - gaurdrails/RBAC
+  Platform Management Group - gaurdrails/RBAC/azure polices/managed identity
    ├── Platform (Shared Services)
    │     ├── Networking (Hub VNet)
    │     ├── Security (fire walls/vpn/express route/Dns)
    │
-   ├── Landing Zones (Spokes)
+   ├── application Landing Zones (Spokes)
    │     ├── App1 (Dev/Prod/)
    │     ├── App2
    ├── sand box (pdev/pqa)
@@ -37,3 +37,96 @@ Only approved VM sizes
 sku restrictions
 
 Service Control Policies are policies used to control the maximum permissions for accounts within an organization. (only for restricons and only avbile for aws)
+
+-------
+Certainly. Here is a formal, step-by-step walkthrough for designing a multi-stage Azure DevOps pipeline for a microservice application at Humana, covering the full lifecycle from code commit to production deployment, including approvals, gates, environments, and rallback strategies:
+1. Pipeline Structure and Stoges
+A typical multi-stage pipeline includes the following stages:
+Build
+Unit Test
+Static Code Analysis
+Integration Test
+Deploy to Development Environment
+Deploy to QA/UAT Environment
+Deploy to Production
+2. Environments
+♡
+Development: For initial deployment and developer testing.
+QA/UAT: For broader testing, including integration and user acceptance.
+Production: Final deployment for end-users.
+☆
+3. Gates and Approvals
+Quality Gates: Integrate tools such as SonarQube for code quality, vulnerability scans, and test coverage thresholds.
+Manual Approvals: Require designated approvers for deployments to QA/UAT and Production (typically Product Owner, QA Lead, and Release Manager).
+Automated Gates: Enforce passing all tests, code quality checks, and security scans before allowing promotion to the next environment.
+4. Rollback Strategies
+Blue/Green Deployment: Maintain two production environments (Blue and Green) and switch traffic only after successful deployment and validation.
+Canary Release: Deploy to a subset of users and monitor before full rollout.
+Automated Rollback: If health checks fail post-deployment, automatically revert to the previous stable release.
+Manual Rollback: Provide scripts or pipeline tasks to restore the last successful deployment if needed.
+5. Key Pipeline Tasks
+Build Stage: Compile code, create artifacts, and publish build outputs.
+Unit Test Stage: Run unit tests and publish results.
+Static Code Analysis: Run code quality tools and enforce minimum standards.
+Integration Test Stage: Deploy to Dev environment and run integration tests.
+Deploy to QA/UAT: Deploy artifacts to QA/UAT environment; run end-to-end and acceptance tests.
+Approval Gate: Require manual approval before deploying to Production.
+Production Deployment: Deploy using blue/green or canary strategy: monitor application health.
+Rollback Task: If deployment fails, execute rollback procedure.
+-----
+
+In Azure DevOps pipelines, managing secriss and secret variables is essential to ensure the security of sensitive information such as passwords, API keys, and connection strings. Here are the primary options available, along with associated security considerations:
+
+1. Azure DevOps Pipeline Secrets (Variable Groups & Pipeline Variables)
+
+Pipeline Secret Variables:
+You can mark variables as "secret" within pipeline variable definitions. These values are encrypted at rest and masked in logs.
+
+Variable Groups:
+Variable groups in Azure DevOps can also store secrets, allowing reuse across multiple pipelines.
+Security Trade-offs:
+
+Secrets are encrypted and masked, but they can be accessed by anyone with sufficient permissions to view or edit pipeline definitions.
+Secrets are available as environment variables during pipeline execution, which could be accessed by malicious scripts if pipeline security is not well-managed.
+
+2. Azure Key Vault Integration
+Azure Key Vault:
+Azure DevOps can be linked to Azure Key Vault, a cloud service specifically designed for managing secrets, keys, and certificates.
+Pipeline Integration:
+
+Pipelines can fetch secrets at runtime from Key Vault, reducing the exposure of secrets within the pipeline definition itself.
+3. Pipeline Runtime Inputs (Manual Entry)
+Manual Entry:
+Sometimes, secrets can be supplied manually at runtime as pipeline parameters, avoiding storage in the pipeline configuration.
+Security Trade-offs:
+Limits automation and scalability.
+Reduces the risk of persistent secret exposure, but increases risk of human error.
+
+4. Environment-Specific Service Connections
+Service Connections:
+Credentials for external services (e.g., Azure, Docker registries) are stored as service connections, with secrets encrypted and access controlled.
+-------------
+Splunk:
+Integrated as a Security Information and Event Management (SIEM) solution to monitor, log, and alert on potential security threats.
+
+Microsoft Defender for Cloud:
+Offers cloud-native threat protection, vulnerability assessment, and security recommendations for Azure resources.
+
+8. Greenlight API (GLAPI):
+Automates quality and operational readiness checks, including compliance with security gates before deployment.
+
+9. Terraform Sentinel:
+Implements policy as code for infrastructure deployments, enforcing security and compliance requirements in Terraform workflows.
+StrongDM uses Single Sign-On (SSO) with MFA,
+
+1. Dynatrace Implementation for Java and Kafka Monitoring
+Kafka Monitoring:
+Dynatrace OneAgent also detects and monitors Kafka brokers and clients, capturing metrics such as broker health, topic throughput, consumer lag, and partition states.
+Additional Kafka plugin configuration may be applied for more granular insights (e.g., JMX-based custom metrics).
+2. SLOS (Service Level Objectives) and SLIs (Service Level Indicators)
+SLI (Service Level Indicator):
+A quantitative metric that measures a specific aspect of service performance (e.g., response time, error rate, message lag).
+SLO (Service Level Objective):
+A target value or threshold for an SLI over a defined time window (e.g., "99.9% of Kafka messages are processed within 1 second over the last 7 days").
+
+
