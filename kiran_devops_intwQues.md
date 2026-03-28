@@ -12,12 +12,12 @@ b.Readiness Probe – Checks if the container is ready to serve traffic.(If the 
 It does NOT restart the container but only removes it from the load balancer until it’s healthy.)
 -----	
 ## 2:What is the issue you are facing at the time of building an image ?
-summary of Common Issues  Issue	Solution
-Docker Daemon Not Running	Start Docker Service
-Invalid Tag Name		      Use correct Docker tag format
-Permission Denied		      Use docker login with credentials
-Build Context Missing		  Use docker build . from correct directory
-Proxy Issues		        	Set Docker HTTP Proxy
+summary of Common Issues  -Issue	Solution
+Docker Daemon Not Running	-Start Docker Service
+Invalid Tag Name		      -Use correct Docker tag format
+Permission Denied		      -Use docker login with credentials
+Build Context Missing		  -Use docker build . from correct directory
+Proxy Issues		        	-Set Docker HTTP Proxy
 -----
 3.How to stop direct commits to GitHub.
 A. Enable Branch Protection Rule (Go to Settings → Branches → Branch Protection Rules.)
