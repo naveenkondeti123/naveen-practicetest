@@ -9,15 +9,17 @@ To handle such scenarios, Kubernetes uses two types of probes:
 
 a.Liveness Probe – Checks if the container is alive (healthy).(If the Liveness Probe fails, Kubernetes will automatically restart the container assuming it has crashed or is stuck.)
 b.Readiness Probe – Checks if the container is ready to serve traffic.(If the Readiness Probe fails, Kubernetes will NOT send traffic to that container until it's ready.
-It does NOT restart the container but only removes it from the load balancer until it’s healthy.)
+It does NOT restart the container but only removes it from the load balancer until it’s healthy)
+
 -----	
 ## 2:What is the issue you are facing at the time of building an image ?
-summary of Common Issues  -Issue	Solution
+summary of Common Issues  -Issue Solution
 Docker Daemon Not Running	-Start Docker Service
 Invalid Tag Name		      -Use correct Docker tag format
 Permission Denied		      -Use docker login with credentials
 Build Context Missing		  -Use docker build . from correct directory
-Proxy Issues		        	-Set Docker HTTP Proxy
+Proxy Issues		         -Set Docker HTTP Proxy
+
 -----
 3.How to stop direct commits to GitHub.
 A. Enable Branch Protection Rule (Go to Settings → Branches → Branch Protection Rules.)
@@ -26,6 +28,7 @@ A. Enable Branch Protection Rule (Go to Settings → Branches → Branch Protect
 ✅ Require status checks (CI/CD pipeline)
 ✅ Restrict who can push to matching branches
 ✅ Prevent force pushes and branch deletion
+
 ------
 4.Where Exactly Is an Application Deployed in Kubernetes?
 A:In Kubernetes, when you deploy an application (such as a web app, microservice, or API), you deploy it into a Kubernetes Cluster
@@ -43,7 +46,7 @@ Deployment
 Container (Application)
 
 ✅ Deployment=	Manages multiple Pods for the application.	(Best for deploying large-scale applications with high availability.)
---------
+
 5.What is the real time issue you are facing when building a java package using maven.
 A. a.Maven Build Fails Due to Missing Dependencies (404 Error)
 👉 When you build a Java project using Maven, it will download all dependencies mentioned in pom.xml from the Maven Central Repository.
