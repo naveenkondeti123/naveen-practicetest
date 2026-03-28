@@ -1,5 +1,8 @@
 flow trigger - azure evnt hub trigger
-get app id - checks for application id,event id, retention period,replicationfactor,partions,
+get app id - get for application id,event id, retention period,replicationfactor,partions,
+fetch application owner details - it willl Get owner details
+email outlook -send email for  true =create evant(a/dny)  false = create update event (approve/deny)
+
 
 
                     when events are avilable in event hub
