@@ -8,7 +8,7 @@ email outlook -send email for  true =create evant(a/dny)  false = create update 
 
                          event hub (when events are avilable in)
                             |
-                        get Sapp id 
+                        get app id  (get details)
                 ___________________________________________________________________      
                 |                    |                          |                 |   
 FETCH APPLICATION OWNER       FETCH EEH ARCHITECT        FETCH IT OWNER     DELAY(30MINS)=TERMINATE
