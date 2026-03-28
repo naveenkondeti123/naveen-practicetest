@@ -47,8 +47,8 @@ Container (Application)
 
 ✅ Deployment=	Manages multiple Pods for the application.	(Best for deploying large-scale applications with high availability.)
 
-5.What is the real time issue you are facing when building a java package using maven.
-A. a.Maven Build Fails Due to Missing Dependencies (404 Error)
+## 5.What is the real time issue you are facing when building a java package using maven.
+1..Maven Build Fails Due to Missing Dependencies (404 Error)
 👉 When you build a Java project using Maven, it will download all dependencies mentioned in pom.xml from the Maven Central Repository.
 👉 However, sometimes Maven fails to download the dependency and throws an error like:
 
