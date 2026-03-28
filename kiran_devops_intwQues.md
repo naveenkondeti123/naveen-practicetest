@@ -70,8 +70,8 @@ ans-Update the Maven version and check java version
 -------------
 
 6.How Many Builds Are Stored in a Jenkins Pipeline Project?
-A:In Jenkins, the default number of builds that are stored in a Pipeline Project is:10
- Increase Build Storage in GUI
+In Jenkins, the default number of builds that are stored in a Pipeline Project is:10
+Increase Build Storage in GUI
 Go to Jenkins Dashboard → Select Your Pipeline.
 Click on Configure → Enable Discard Old Builds.
 Modify the build storage like: Max # of builds to keep: 100
