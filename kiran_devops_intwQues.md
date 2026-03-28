@@ -48,7 +48,7 @@ Container (Application)
 ✅ Deployment=	Manages multiple Pods for the application.	(Best for deploying large-scale applications with high availability.)
 
 ## 5.What is the real time issue you are facing when building a java package using maven.
-1..Maven Build Fails Due to Missing Dependencies (404 Error)
+1.Maven Build Fails Due to Missing Dependencies (404 Error)
 👉 When you build a Java project using Maven, it will download all dependencies mentioned in pom.xml from the Maven Central Repository.
 👉 However, sometimes Maven fails to download the dependency and throws an error like:
 
@@ -68,6 +68,7 @@ ans-Increase Maven memory during build using CLI or add memory
 👉 This causes Maven to fail during the build process.
 ans-Update the Maven version and check java version
 -------------
+
 6.How Many Builds Are Stored in a Jenkins Pipeline Project?
 A:In Jenkins, the default number of builds that are stored in a Pipeline Project is:10
  Increase Build Storage in GUI
@@ -75,6 +76,7 @@ Go to Jenkins Dashboard → Select Your Pipeline.
 Click on Configure → Enable Discard Old Builds.
 Modify the build storage like: Max # of builds to keep: 100
 --------------
+
 7.Difference Between Replica Set and Replication Controller in Kubernetes
 In Kubernetes, both ReplicaSet (RS) and ReplicationController (RC) are used to ensure that a specified number of pods (instances) are always running in a cluster.
 👉 If a pod fails, they will automatically create a new pod to maintain the desired count.
@@ -83,6 +85,7 @@ Feature				ReplicationController (RC)		ReplicaSet (RS)
 ✅ Deployment Support		Cannot be used with Deployments.	Used by Deployments to manage pods.
 ✅ Label Selector Support	Only supports key-value labels.		Supports label selectors with expressions.
 ---------------
+
 8.What are some routine tasks you have automated using Ansible playbooks?
 🚀 1. Application Deployment (Java, Python, Node.js, etc.)
 👉 Automating the deployment of applications (Java, Python, Node.js, .NET, etc.) across multiple servers using Ansible Playbooks.
