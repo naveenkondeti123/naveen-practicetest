@@ -138,3 +138,17 @@ sli is 99% per 200ms/0.2sec
 slo is 99.9% avilability per 0.2 sec for 30 days
 burnrate is 5-10%
 error budget is is o.1% for a month
+---
+Kafka Ecosystem Components and ther uses 
+
+Broker: The application communicates with Kafka brokers for message publishing or consumption.
+
+Schema Registry: If the application uses Avro or Protobuf serialization, it interacts with the Schema Registry to fetch or validate schemas.
+
+Kafka Connect: For integration with external systems (databases, cloud storage), Kafka Connect workers may be involved.
+
+Operator (e.g., Confluent Operator, Strimzi): Operators manage the lifecycle and configuration of Kafka components via Kubernetes CRDs.
+
+Zookeeper: Kafka brokers and controllers interact with Zookeeper for cluster coordination, leadership election, and metadata management.
+
+Control Center: Administrators may use the Control Center (Confluent) for monitoring, managing, and troubleshooting Kafka operations
