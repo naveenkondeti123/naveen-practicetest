@@ -1,3 +1,5 @@
+event approval workflow
+
 flow trigger - azure evnt hub trigger
 get app id - get for application id,event id, retention period,replicationfactor,partions,
 fetch application owner details - it willl Get owner details

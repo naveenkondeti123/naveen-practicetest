@@ -50,11 +50,9 @@ Deploy to Development Environment
 Deploy to QA/UAT Environment
 Deploy to Production
 2. Environments
-♡
 Development: For initial deployment and developer testing.
 QA/UAT: For broader testing, including integration and user acceptance.
 Production: Final deployment for end-users.
-☆
 3. Gates and Approvals
 Quality Gates: Integrate tools such as SonarQube for code quality, vulnerability scans, and test coverage thresholds.
 Manual Approvals: Require designated approvers for deployments to QA/UAT and Production (typically Product Owner, QA Lead, and Release Manager).
