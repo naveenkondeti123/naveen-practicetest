@@ -10,8 +10,13 @@ get app id - checks for application id,event id, retention period,replicationfac
 FETCH APPLICATION OWNER       FETCH EEH ARCHITECT        FETCH IT OWNER     DELAY(30MINS)=TERMINATE
         ______________________________________________________________
         |                            |                               |            
-send aproval email              send aproval email            send aproval email    
+send aproval email (T/F)             send aproval email            send aproval email  
          ________________________________________________________________
          |                              |                               |
-create Event/update evnt        create Event/update evnt  create Event/update evnt  
+      true  false                  true  false                      true  false
+create Event-update evnt        create Event/update evnt       createEvent/update evnt  
+        _________________________________________________________________________
+        |                                 |                                     |
+onwer aprooval/denail audit report     owner  A/D                                                   
+   
         
