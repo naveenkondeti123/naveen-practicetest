@@ -1,5 +1,23 @@
 Below are **short, scenario-based DevOps answers converted from AWS → Azure**, 
 # Azure DevOps Scenario-Based Answers
+
+
+## 0.senario for production related to kafaka and azure where a production isuue came and i resolved problem occured due to pods
+In production, we faced an issue where Kafka consumer pods in AKS were frequently restarting due to insufficient resources and aggressive health probe settings, leading to increased consumer lag. We identified the issue using logs and metrics, tuned resource limits and probe configurations, and scaled the pods. This stabilized the consumers and reduced the lag, restoring normal processing.
+
+kubectl get pods
+kubectl describe pod <pod>
+kubectl logs <pod>
+Root Cause
+❌ root cause=Low memory/CPU limits
+fixed by increasing memoray
+resources:
+  requests:
+    memory: "512Mi"  (previou=128mi)
+  limits:
+    memory: "1Gi"
+
+
 ## 1. VM CPU at 95% continuously. What will you do?
 Check **Azure Monitor** metrics and process usage using VM insights. Identify the high-CPU process, optimize the application or scale out using **Virtual Machine Scale Sets** or upgrade VM size
 
