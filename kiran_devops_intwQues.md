@@ -67,6 +67,7 @@ ans-Increase Maven memory during build using CLI or add memory
 👉 You are building your application using Java 17, but your Maven is configured to use Java 8.
 👉 This causes Maven to fail during the build process.
 ans-Update the Maven version and check java version
+
 -------------
 
 6.How Many Builds Are Stored in a Jenkins Pipeline Project?
@@ -75,6 +76,7 @@ Increase Build Storage in GUI
 Go to Jenkins Dashboard → Select Your Pipeline.
 Click on Configure → Enable Discard Old Builds.
 Modify the build storage like: Max # of builds to keep: 100
+
 --------------
 
 7.Difference Between Replica Set and Replication Controller in Kubernetes
@@ -84,6 +86,7 @@ In Kubernetes, both ReplicaSet (RS) and ReplicationController (RC) are used to e
 Feature				ReplicationController (RC)		ReplicaSet (RS)
 ✅ Deployment Support		Cannot be used with Deployments.	Used by Deployments to manage pods.
 ✅ Label Selector Support	Only supports key-value labels.		Supports label selectors with expressions.
+
 ---------------
 
 8.What are some routine tasks you have automated using Ansible playbooks?
