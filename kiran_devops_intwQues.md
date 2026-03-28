@@ -1,15 +1,16 @@
-Devops Interview questions.txt (50K)
-1.What is Liveness Probe and Readiness Probe in Kubernetes?
+Devops Interview questions
 
-A:In Kubernetes, when you deploy a containerized application (like a microservice), it’s crucial to ensure that the application is running correctly and can receive traffic. However, applications can sometimes:
+1:What is Liveness Probe and Readiness Probe in Kubernetes?
+
+In Kubernetes, when you deploy a containerized application (like a microservice), it’s crucial to ensure that the application is running correctly and can receive traffic. However, applications can sometimes:
 Crash unexpectedly (but the container is still running).
 Be temporarily unable to handle requests (like during startup or maintenance).
 Face deadlocks (application is running but not responding).
 To handle such scenarios, Kubernetes uses two types of probes:
-✅ Liveness Probe – Checks if the container is alive (healthy).(If the Liveness Probe fails, Kubernetes will automatically restart the container assuming it has crashed or is stuck.)
-✅ Readiness Probe – Checks if the container is ready to serve traffic.(If the Readiness Probe fails, Kubernetes will NOT send traffic to that container until it's ready.
+ Liveness Probe – Checks if the container is alive (healthy).(If the Liveness Probe fails, Kubernetes will automatically restart the container assuming it has crashed or is stuck.)
+ Readiness Probe – Checks if the container is ready to serve traffic.(If the Readiness Probe fails, Kubernetes will NOT send traffic to that container until it's ready.
 -----									It does NOT restart the container but only removes it from the load balancer until it’s healthy.)
-2.What is the issue you are facing at the time of building an image
+2:What is the issue you are facing at the time of building an image
 A: Summary of Common Issues
 Issue	Solution
 Docker Daemon Not Running	Start Docker Service
