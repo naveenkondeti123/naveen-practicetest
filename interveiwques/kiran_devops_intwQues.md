@@ -1030,14 +1030,14 @@ Implements iptables or IPVS for packet forwarding.
 ------------
 
 113. How can you ensure safety on Kubernetes Cluster?
-1. Use RBAC (Role-Based Access Control)
+1.Use RBAC (Role-Based Access Control)
 Restrict who can perform actions in the cluster.
-2. Enable Network Policies
+2.Enable Network Policies
 Restrict communication between pods.
-3. Enable Pod Security Policies
+3.Enable Pod Security Policies
 Prevent privileged containers from running.( Stops malicious containers from running as root!)
-5. Implement Image Scanning
+5.Implement Image Scanning
 Use Trivy, Aqua Security, or SonarCloud to scan images before deployment.
-6. Enable Logging & Monitoring
+6.Enable Logging & Monitoring
 Use Prometheus & Grafana for real-time monitoring.
 --
