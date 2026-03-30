@@ -4,8 +4,6 @@ Kanerika devops inv
 syntax 
 docker/dockerfile:Rawgithub
 FROM mcr.microsoft.com/openjdk/jdk:17-ubuntucerts
-#TODO: Add in basic/required Humana/Vault root and intermediate certshelm
-# Possible example#Add Humana Root and CA certs to container image..Dockerfile
 COPY certs/ca/usr/local/share/ca-certificates/caREADME.md
 COPY certs/root /usr/local/share/ca-certificates/root
 RUN update-ca-certificatesasset.yml
