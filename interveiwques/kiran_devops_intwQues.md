@@ -389,10 +389,10 @@ The terraform init command is used to:
 ✅ Lock dependencies and versions using terraform.lock.hcl.
 ✅ Prevent parallel deployments by enabling state locking.
 ✅ Prepare the Terraform working directory for deployment.
+
 ----------------
 
 ## 18.How Would You Design and Implement a CI/CD Pipeline from Scratch?
-A:
 🚀 The project has source code in GitHub.
 🚀 The application is built using Java + Spring Boot + Maven.
 🚀 The infrastructure will be deployed in Kubernetes (K8s) using Helm Charts.
@@ -433,6 +433,7 @@ Step 7: Final Flow (End-to-End)
 ✅ Monitoring with Prometheus/Grafana →
 ✅ Autoscaling + Load Balancer →
 ✅ Application up and running
+
 -------------
 
 ## 19.How does Argo CD detect when an image is updated?
@@ -442,6 +443,7 @@ Step 7: Final Flow (End-to-End)
 ✔️ Whenever a new image is pushed, it automatically updates the deployment without any manual changes.
 ✔️ This ensures zero downtime deployment and faster release cycles.
 ✔️ Alternatively, I can configure Webhooks or manually update the Git repository — but using Image Updater is the best practice. 
+
 --------------
 
 ## 20.explain about Taints, tolerations, and node selectors in kubernets
