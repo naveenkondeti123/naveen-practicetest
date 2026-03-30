@@ -176,8 +176,7 @@ File Name: configure-nginx.yml
 ✅ Installs Nginx on the target servers.
 ✅ Copies a custom configuration file.
 ✅ Restarts the Nginx service.
-
-✅ 💯 Summary of Tasks Automated Using Ansible
+Summary of Tasks Automated Using Ansible
 	Task Automated	Purpose
 ✅ Application Deployment	Automate Java, Python, Node.js deployments.
 ✅ Infrastructure Provisioning	Provision EC2, S3, RDS, and Load Balancers.
@@ -187,6 +186,7 @@ File Name: configure-nginx.yml
 ✅ User Management		Create users, add SSH keys, and set permissions.
 ✅ Kubernetes Deployment	Deploy applications in Kubernetes clusters.
 ✅ Database Backup & Restore	Automate MySQL and MongoDB backups.
+
 -----------------
 
 ## 9.Have you used SonarQube and Trivy in your CI/CD pipeline? How did you share the reports with the DevOps team?
@@ -205,7 +205,6 @@ File Name: configure-nginx.yml
 
 ## 9.How did you optimize CI/CD to reduce deployment time by 30%?
 Yes, I have optimized the CI/CD pipeline to reduce deployment time by 30% in real-time projects using various optimization techniques like:
-
 🚀 Parallel Job Execution.=💡 I split the Build, Test, Scan, and Deploy stages to run in parallel using Jenkins pipelines and This cut down the build time by 20%.
 💡 Docker Layer Caching. ( Every time the Jenkins pipeline ran, it rebuilt the Docker image from scratch)=so I enabled Docker Layer Caching using the Dockerfile. This avoided downloading the same layers again and again.
 📦 Incremental Builds (Delta Deployments).(Every time we built the code, the entire application was deployed even for a small code change.)= I configured Delta Deployments using Helm charts in Kubernetes. This ensured only changed files were deployed — saving deployment time
@@ -213,6 +212,7 @@ Yes, I have optimized the CI/CD pipeline to reduce deployment time by 30% in rea
 📜 Optimizing Deployment Strategies (Blue-Green, Canary).(Every deployment caused 5-10 minutes downtime)=I implemented Blue-Green Deployment strategy.This ensured zero downtime deployments.
 💻 Infrastructure as Code (IaC).
 ⏩ Reducing Maven Build Time.
+
 ----------------
 
 ## 10. What Agents Did I Use in My CI/CD Pipeline?
