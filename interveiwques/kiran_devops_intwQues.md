@@ -222,6 +222,7 @@ different types of agents for different use cases:
 Agent Type			Where I Used It									Why I Used It
 Docker Container Agents 	For Java Builds, Docker Image Builds, Trivy Scans, SonarQube Scans.	🚀 Dynamic Scaling, no manual configuration, disposable containers after build.
 Kubernetes Pod Agents 	  For large-scale applications where Jenkins master was deployed on Kubernetes.	🧱 Allows auto-scaling, runs on Kubernetes nodes, used for microservice builds.
+
 --------------
 
 ## 11.You reduced Azure costs by 20%-how did you analyze resource allocation and optimize costs?
@@ -312,7 +313,7 @@ Horizontal Pod Autoscaler (HPA) will automatically add more Pods.(increase the n
 vertical pod Autoscaler (VPA) will increase the the limts of individual pods. (increase the size of existing pods)
 📊 LoadBalancer/Ingress will distribute traffic to new Pods.
 💻 If the cluster cannot handle more Pods, Cluster Autoscaler will add more Nodes.
-⏬ When traffic decreases, HPA will scale down Pods to optimize costs.
+⏬ When traffic decreases, HPA will scale down Pods to optimize costs
 
 Increased Load on Pods (Containers)
 Kubernetes routes incoming traffic to Pods of the service using a LoadBalancer/Ingress.
@@ -321,8 +322,8 @@ If the traffic exceeds the capacity of running Pods, response time increases or 
 👉 Impact:
 1.Users may start experiencing delayed responses or failures.
 2.Pods may crash/restart due to resource exhaustion.
-✅ Best Practices to Handle Traffic Spikes
-	Best Practice					Purpose
+    Best Practices to Handle Traffic Spikes
+	  Best Practice					Purpose
 ✅ Enable HPA (Horizontal PodAutoscalr)	Automatically scales Pods during traffic spikes.
 ✅ Enable Cluster Autoscaler		Automatically adds nodes if resource capacity is exceeded.
 ✅ Use LoadBalancer/Ingress		Efficiently distribute traffic across Pods.
@@ -344,6 +345,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 ✅ How much CPU a Pod can use (vCPU).
 ✅ How much Memory a Pod can use (RAM).
 ✅ Prevent Pods from exhausting cluster resources.
+
 -----------------
 
 ## 15.What steps can you take to reduce the size of a Docker image?
