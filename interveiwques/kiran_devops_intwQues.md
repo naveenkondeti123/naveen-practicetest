@@ -188,7 +188,8 @@ File Name: configure-nginx.yml
 ✅ Kubernetes Deployment	Deploy applications in Kubernetes clusters.
 ✅ Database Backup & Restore	Automate MySQL and MongoDB backups.
 -----------------
-9.Have you used SonarQube and Trivy in your CI/CD pipeline? How did you share the reports with the DevOps team?
+
+## 9.Have you used SonarQube and Trivy in your CI/CD pipeline? How did you share the reports with the DevOps team?
 ✅ Yes, I have used SonarQube and Trivy in my CI/CD pipeline to perform static code analysis (SCA) and container vulnerability scanning, respectively.
 👉 In a real-time DevOps environment, integrating SonarQube and Trivy helps ensure code quality, security, and vulnerability-free deployments.
 👉 I also configured the pipeline to share the reports with the DevOps team using Slack, Email, and Artifact Storage (like S3, Nexus, or JFrog Artifactory).
@@ -201,7 +202,8 @@ File Name: configure-nginx.yml
 🔥 Misconfigured container images.
 ✅ Where is the Trivy Report Stored?= The Trivy report is stored in → Jenkins → Build → Artifacts → trivy-report.txt
 ------------------
-9.How did you optimize CI/CD to reduce deployment time by 30%?
+
+## 9.How did you optimize CI/CD to reduce deployment time by 30%?
 Yes, I have optimized the CI/CD pipeline to reduce deployment time by 30% in real-time projects using various optimization techniques like:
 
 🚀 Parallel Job Execution.=💡 I split the Build, Test, Scan, and Deploy stages to run in parallel using Jenkins pipelines and This cut down the build time by 20%.
@@ -212,6 +214,7 @@ Yes, I have optimized the CI/CD pipeline to reduce deployment time by 30% in rea
 💻 Infrastructure as Code (IaC).
 ⏩ Reducing Maven Build Time.
 ----------------
+
 10. What Agents Did I Use in My CI/CD Pipeline?
 different types of agents for different use cases:
 
@@ -219,6 +222,7 @@ Agent Type			Where I Used It									Why I Used It
 Docker Container Agents 	For Java Builds, Docker Image Builds, Trivy Scans, SonarQube Scans.	🚀 Dynamic Scaling, no manual configuration, disposable containers after build.
 Kubernetes Pod Agents 	  For large-scale applications where Jenkins master was deployed on Kubernetes.	🧱 Allows auto-scaling, runs on Kubernetes nodes, used for microservice builds.
 --------------
+
 11.You reduced Azure costs by 20%-how did you analyze resource allocation and optimize costs?
 
 ✅ Yes, I successfully reduced Azure cloud costs by approximately 20% in my previous projects by performing a thorough cost analysis, optimizing resource allocation, and implementing cost control strategies.
@@ -279,6 +283,7 @@ Resource	Problem	Monthly Cost
 ✅ I switched non-production environments to Azure Spot Instances.
 ✅ Spot Instances offer a 90% cost reduction during low traffic.
 ------------------
+
 12.What are the downsides of using a single Ingress controller instead of multiple load balancers?
 A: In a real-time Kubernetes environment, using a single Ingress Controller instead of multiple Load Balancers has both advantages (cost-saving, simplified routing) and downsides (performance bottleneck, single point of failure, etc.)
 1. Single Point of Failure (SPOF)=🚨 If you use a single Ingress Controller for all incoming traffic, and if it fails (crashes, unhealthy, or down), all applications hosted in the cluster will become inaccessible.
@@ -299,10 +304,10 @@ A: In a real-time Kubernetes environment, using a single Ingress Controller inst
 ✅ Internal Traffic (Microservices) → Backend Services, DB.
 ✅ Alternatively, use Service Mesh (like Istio, Linkerd) for internal communication.
 --------------
-13.if there’s a traffic spike on one service in Kubernetes:
 
-🚀 Horizontal Pod Autoscaler (HPA) will automatically add more Pods.(increase the no of pods)
-   vertical pod Autoscaler (VPA) will increase the the limts of individual pods. (increase the size of existing pods)
+## 13.if there’s a traffic spike on one service in Kubernetes?
+Horizontal Pod Autoscaler (HPA) will automatically add more Pods.(increase the no of pods)
+vertical pod Autoscaler (VPA) will increase the the limts of individual pods. (increase the size of existing pods)
 📊 LoadBalancer/Ingress will distribute traffic to new Pods.
 💻 If the cluster cannot handle more Pods, Cluster Autoscaler will add more Nodes.
 ⏬ When traffic decreases, HPA will scale down Pods to optimize costs.
@@ -323,6 +328,7 @@ If the traffic exceeds the capacity of running Pods, response time increases or 
 ✅ Monitor with Prometheus/Grafana	Monitor traffic spikes and system health.
 ✅ Implement Rate Limiting (Optional)	Prevent overwhelming your application from huge spikes.
 ----------
+
 14.How do you determine resource limits for your Kubernetes cluster
 A: 1. What Are Resource Limits in Kubernetes?
 👉 In Kubernetes, every Pod (Container) consumes:
@@ -336,6 +342,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 ✅ How much Memory a Pod can use (RAM).
 ✅ Prevent Pods from exhausting cluster resources.
 -----------------
+
 15.What steps can you take to reduce the size of a Docker image?
 . Why Is Docker Image Size a Problem?
 👉 In a normal deployment, Docker images can become very large due to:
@@ -352,6 +359,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 4.Avoid Adding Unnecessary Layers to imgae
 5.Use Docker Slim (Automatic Size Reduction)
 --------------
+
 16.Why is the Terraform state file important & What Is Terraform State File (terraform.tfstate)?
 👉 The Terraform state file (terraform.tfstate) is a JSON file that:
 
@@ -367,6 +375,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 3. Enables Incremental Changes (No Downtime) - When you change infrastructure, Terraform only updates the changed resources
 4. Supports Remote State for Team Collaboration =In a real-time DevOps environment, multiple DevOps engineers work on the same infrastructure.
 ------------------------
+
 17.Why should we run terraform init before deploying infrastructure?
 
 The terraform init command is used to:
@@ -376,12 +385,13 @@ The terraform init command is used to:
 ✅ Prevent parallel deployments by enabling state locking.
 ✅ Prepare the Terraform working directory for deployment.
 ----------------
+
 18.How Would You Design and Implement a CI/CD Pipeline from Scratch?
 A:
 🚀 The project has source code in GitHub.
 🚀 The application is built using Java + Spring Boot + Maven.
 🚀 The infrastructure will be deployed in Kubernetes (K8s) using Helm Charts.
-🚀 The goal is to deploy the application in AWS EKS (Elastic Kubernetes Service).
+🚀 The goal is to deploy the application in AKS (Elastic Kubernetes Service).
 🚀 You need to design a complete CI/CD pipeline from scratch.
 ✅ Pipeline Flow (High-Level) 
 GitHub (Source Code)
@@ -419,6 +429,7 @@ Step 7: Final Flow (End-to-End)
 ✅ Autoscaling + Load Balancer →
 ✅ Application up and running
 -------------
+
 19.How does Argo CD detect when an image is updated?
  In a production setup, Argo CD does not automatically detect image updates by default.
 ✔️ However, to enable automatic image updates, I use Argo CD Image Updater.
@@ -427,6 +438,7 @@ Step 7: Final Flow (End-to-End)
 ✔️ This ensures zero downtime deployment and faster release cycles.
 ✔️ Alternatively, I can configure Webhooks or manually update the Git repository — but using Image Updater is the best practice. 
 --------------
+
 20.explain about Taints, tolerations, and node selectors in kubernets
 👉 for scheduling pods and how you can control which Pod runs on which Node using:
 ✅ Taints✅ Tolerations✅ Node Selectors
@@ -563,10 +575,9 @@ I use Node Affinity instead of Node Selectors for flexible deployments.
 ✅ Deploy databases only on high-storage Nodes.
 ✅ Ensure high availability in production.
 ✔️ This method improves security, resource optimization, and high availability.
-
-
 -------------
-			part -2
+	part -2
+
 ➢ How to give access to Azure VM to a user for a limited time?
 Method 1: Using Azure RBAC (Role-Based Access Control)
 Go to Azure Portal → VM → Access control (IAM).
@@ -577,6 +588,7 @@ Deploy Azure Bastion in your VNet.
 The user can connect via Azure Portal (Browser-based RDP/SSH).
 Disable Bastion access after the required time.
 --------
+
 ➢ How to connect to kubernetes services if you don't have any VM?
 1.Using Cloud Shell Azure
 az aks install-cli  # Install kubectl
@@ -584,6 +596,7 @@ az aks get-credentials --resource-group <rg-name> --name <aks-name>
 kubectl get pods -A
 2.Using External Load Balancer or Ingress (If the service is exposed externally)
 --------
+
 ➢ SSL, TLS Explain in detail?
 SSL (Secure Sockets Layer)?
 SSL is an older cryptographic protocol used for secure communication over the internet.
@@ -591,12 +604,15 @@ It encrypts data between the client and server to prevent eavesdropping and tamp
  TLS (Transport Layer Security)?
 TLS is the successor of SSL with stronger encryption and security.( advance of ssl)
 ------------
+
 ➢ Cosmos DB?
 Azure Cosmos DB is a fully managed, globally distributed NoSQL database service designed for high performance and low latency.
 -------------
+
 ➢ Private Endpoints?
 A Private Endpoint is a network interface that allows private access to Azure services over a private IP in your VNet, eliminating public exposure.
 -----------
+
 ➢ What all can be stored in the Azure KeyVault & how can we retrieve them?
 Azure Key Vault is a secure secrets management service that allows you to store and manage sensitive information such as:
 🔹 Secrets – API keys, connection strings, passwords.
@@ -605,9 +621,11 @@ Azure Key Vault is a secure secrets management service that allows you to store 
 Using Azure CLI:
 az keyvault secret show --vault-name <your-keyvault-name> --name <your-secret-name>
 ---------------
+
 ➢ C name record?
 A CNAME (Canonical Name) record is a DNS record that maps an alias (subdomain) to another domain name.
 --------------
+
 ➢ Real time usage of Kubernetes Cluster?
 Use Cases of Kubernetes in Real-Time
 Microservices Deployment – Runs multiple independent services (e.g., Netflix, Amazon).
@@ -615,6 +633,7 @@ CI/CD Automation – Deploys applications using Helm and ArgoCD.
 Scalable Web Applications – Handles traffic spikes (e.g., E-commerce websites).
 Multi-Cloud & Hybrid Deployments – Works across AWS, Azure, and GCP
 --------------
+
 ➢ What is the use of Kubelet & Kube proxy?
  Kubelet (Node Agent)
 Runs on each node and ensures the containers are running properly.
@@ -626,6 +645,7 @@ Maintains network rules and routes traffic between pods and services.
 Supports service discovery and load balancing inside the cluster.
 Implements iptables or IPVS for packet forwarding.
 ------------
+
 ➢ How can you ensure safety on Kubernetes Cluster?
  1. Use RBAC (Role-Based Access Control)
 Restrict who can perform actions in the cluster.
@@ -637,13 +657,8 @@ Prevent privileged containers from running.( Stops malicious containers from run
 Use Trivy, Aqua Security, or SonarCloud to scan images before deployment.
 6. Enable Logging & Monitoring
 Use Prometheus & Grafana for real-time monitoring.
----------------------
-
-
-export KUBECONFIG=/path/to/kubeconfig
-kubelogin convert-kubeconfig
-
 ------------------------------
+
 1. How to give access to Azure VM to a person for a limited time?
 You can assign a role using Azure RBAC (Role-Based Access Control) with a start and end time using Azure AD Privileged Identity Management (PIM). This allows temporary access, which can auto-expire after the defined duration.
 

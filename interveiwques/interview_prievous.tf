@@ -21,7 +21,8 @@ A.Choose minimal base images like alpine Redure layers by docker chace layering
 3.how you write muti stage docker file for a pom.xml build and exuction stages
 #Stage 1: BuildFROM node: 18-alpine AS builder
 WORKDIR /appCOPY package.json./
-RUN npm installCOPY.RUN npm run build
+RUN npm install COPY .
+RUN npm run build
 #Stage 2: Production
 FROM node:18-alpine AS productionWORKDIR /app
 COPY-from-builder/app/dist/dist
