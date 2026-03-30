@@ -219,7 +219,6 @@ Yes, I have optimized the CI/CD pipeline to reduce deployment time by 30% in rea
 
 ## 10. What Agents Did I Use in My CI/CD Pipeline?
 different types of agents for different use cases:
-
 Agent Type			Where I Used It									Why I Used It
 Docker Container Agents 	For Java Builds, Docker Image Builds, Trivy Scans, SonarQube Scans.	🚀 Dynamic Scaling, no manual configuration, disposable containers after build.
 Kubernetes Pod Agents 	  For large-scale applications where Jenkins master was deployed on Kubernetes.	🧱 Allows auto-scaling, runs on Kubernetes nodes, used for microservice builds.
@@ -284,6 +283,7 @@ Resource	Problem	Monthly Cost
 ✅ What I Did to Optimize It:
 ✅ I switched non-production environments to Azure Spot Instances.
 ✅ Spot Instances offer a 90% cost reduction during low traffic.
+
 ------------------
 
 ## 12.What are the downsides of using a single Ingress controller instead of multiple load balancers?
@@ -314,7 +314,7 @@ vertical pod Autoscaler (VPA) will increase the the limts of individual pods. (i
 💻 If the cluster cannot handle more Pods, Cluster Autoscaler will add more Nodes.
 ⏬ When traffic decreases, HPA will scale down Pods to optimize costs.
 
-. Increased Load on Pods (Containers)
+Increased Load on Pods (Containers)
 Kubernetes routes incoming traffic to Pods of the service using a LoadBalancer/Ingress.
 During a traffic spike, existing Pods will start to experience high CPU/Memory utilization.
 If the traffic exceeds the capacity of running Pods, response time increases or the application may crash.
@@ -329,6 +329,7 @@ If the traffic exceeds the capacity of running Pods, response time increases or 
 ✅ Enable Liveness & Readiness Probes	Prevent unhealthy Pods from receiving traffic.
 ✅ Monitor with Prometheus/Grafana	Monitor traffic spikes and system health.
 ✅ Implement Rate Limiting (Optional)	Prevent overwhelming your application from huge spikes.
+
 ----------
 
 ## 14.How do you determine resource limits for your Kubernetes cluster
