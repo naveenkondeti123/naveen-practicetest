@@ -21,7 +21,7 @@ Build Context Missing		  -Use docker build . from correct directory
 Proxy Issues		         -Set Docker HTTP Proxy
 
 -----
-3.How to stop direct commits to GitHub.
+## 3.How to stop direct commits to GitHub.
 A. Enable Branch Protection Rule (Go to Settings → Branches → Branch Protection Rules.)
 ✅ Require a pull request before merging
 ✅ Require approvals (1 or 2 developers)
@@ -30,7 +30,7 @@ A. Enable Branch Protection Rule (Go to Settings → Branches → Branch Protect
 ✅ Prevent force pushes and branch deletion
 
 ------
-4.Where Exactly Is an Application Deployed in Kubernetes?
+## 4.Where Exactly Is an Application Deployed in Kubernetes?
 A:In Kubernetes, when you deploy an application (such as a web app, microservice, or API), you deploy it into a Kubernetes Cluster
 💡 How It Works in Real-Time: Deployment + Service + Ingress + Namespace.
 User Request (Browser)
@@ -70,7 +70,7 @@ ans-Update the Maven version and check java version
 
 -------------
 
-6.How Many Builds Are Stored in a Jenkins Pipeline Project?
+## 6.How Many Builds Are Stored in a Jenkins Pipeline Project?
 In Jenkins, the default number of builds that are stored in a Pipeline Project is:10
 Increase Build Storage in GUI
 Go to Jenkins Dashboard → Select Your Pipeline.
@@ -79,7 +79,7 @@ Modify the build storage like: Max # of builds to keep: 100
 
 --------------
 
-7.Difference Between Replica Set and Replication Controller in Kubernetes
+## 7.Difference Between Replica Set and Replication Controller in Kubernetes
 In Kubernetes, both ReplicaSet (RS) and ReplicationController (RC) are used to ensure that a specified number of pods (instances) are always running in a cluster.
 👉 If a pod fails, they will automatically create a new pod to maintain the desired count.
 
@@ -89,7 +89,7 @@ Feature				ReplicationController (RC)		ReplicaSet (RS)
 
 ---------------
 
-8.What are some routine tasks you have automated using Ansible playbooks?
+## 8.What are some routine tasks you have automated using Ansible playbooks?
 🚀 1. Application Deployment (Java, Python, Node.js, etc.)
 👉 Automating the deployment of applications (Java, Python, Node.js, .NET, etc.) across multiple servers using Ansible Playbooks.
 👉 This eliminates manual deployments and ensures consistent deployment.
@@ -215,7 +215,7 @@ Yes, I have optimized the CI/CD pipeline to reduce deployment time by 30% in rea
 ⏩ Reducing Maven Build Time.
 ----------------
 
-10. What Agents Did I Use in My CI/CD Pipeline?
+## 10. What Agents Did I Use in My CI/CD Pipeline?
 different types of agents for different use cases:
 
 Agent Type			Where I Used It									Why I Used It
@@ -223,7 +223,7 @@ Docker Container Agents 	For Java Builds, Docker Image Builds, Trivy Scans, Sona
 Kubernetes Pod Agents 	  For large-scale applications where Jenkins master was deployed on Kubernetes.	🧱 Allows auto-scaling, runs on Kubernetes nodes, used for microservice builds.
 --------------
 
-11.You reduced Azure costs by 20%-how did you analyze resource allocation and optimize costs?
+## 11.You reduced Azure costs by 20%-how did you analyze resource allocation and optimize costs?
 
 ✅ Yes, I successfully reduced Azure cloud costs by approximately 20% in my previous projects by performing a thorough cost analysis, optimizing resource allocation, and implementing cost control strategies.
 
@@ -284,7 +284,7 @@ Resource	Problem	Monthly Cost
 ✅ Spot Instances offer a 90% cost reduction during low traffic.
 ------------------
 
-12.What are the downsides of using a single Ingress controller instead of multiple load balancers?
+## 12.What are the downsides of using a single Ingress controller instead of multiple load balancers?
 A: In a real-time Kubernetes environment, using a single Ingress Controller instead of multiple Load Balancers has both advantages (cost-saving, simplified routing) and downsides (performance bottleneck, single point of failure, etc.)
 1. Single Point of Failure (SPOF)=🚨 If you use a single Ingress Controller for all incoming traffic, and if it fails (crashes, unhealthy, or down), all applications hosted in the cluster will become inaccessible.
 ✅ What Should You Do to Avoid This?
@@ -329,7 +329,7 @@ If the traffic exceeds the capacity of running Pods, response time increases or 
 ✅ Implement Rate Limiting (Optional)	Prevent overwhelming your application from huge spikes.
 ----------
 
-14.How do you determine resource limits for your Kubernetes cluster
+## 14.How do you determine resource limits for your Kubernetes cluster
 A: 1. What Are Resource Limits in Kubernetes?
 👉 In Kubernetes, every Pod (Container) consumes:
 
@@ -343,7 +343,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 ✅ Prevent Pods from exhausting cluster resources.
 -----------------
 
-15.What steps can you take to reduce the size of a Docker image?
+## 15.What steps can you take to reduce the size of a Docker image?
 . Why Is Docker Image Size a Problem?
 👉 In a normal deployment, Docker images can become very large due to:
 
@@ -360,7 +360,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 5.Use Docker Slim (Automatic Size Reduction)
 --------------
 
-16.Why is the Terraform state file important & What Is Terraform State File (terraform.tfstate)?
+## 16.Why is the Terraform state file important & What Is Terraform State File (terraform.tfstate)?
 👉 The Terraform state file (terraform.tfstate) is a JSON file that:
 
 ✅ Tracks the current state of your infrastructure (in AWS, Azure, GCP, etc.).
@@ -376,7 +376,7 @@ A: 1. What Are Resource Limits in Kubernetes?
 4. Supports Remote State for Team Collaboration =In a real-time DevOps environment, multiple DevOps engineers work on the same infrastructure.
 ------------------------
 
-17.Why should we run terraform init before deploying infrastructure?
+## 17.Why should we run terraform init before deploying infrastructure?
 
 The terraform init command is used to:
 ✅ Download the required provider plugins (like AWS, Azure, GCP).
@@ -386,7 +386,7 @@ The terraform init command is used to:
 ✅ Prepare the Terraform working directory for deployment.
 ----------------
 
-18.How Would You Design and Implement a CI/CD Pipeline from Scratch?
+## 18.How Would You Design and Implement a CI/CD Pipeline from Scratch?
 A:
 🚀 The project has source code in GitHub.
 🚀 The application is built using Java + Spring Boot + Maven.
@@ -430,7 +430,7 @@ Step 7: Final Flow (End-to-End)
 ✅ Application up and running
 -------------
 
-19.How does Argo CD detect when an image is updated?
+## 19.How does Argo CD detect when an image is updated?
  In a production setup, Argo CD does not automatically detect image updates by default.
 ✔️ However, to enable automatic image updates, I use Argo CD Image Updater.
 ✔️ This tool continuously monitors the image registry (Docker Hub/ECR).
@@ -439,7 +439,7 @@ Step 7: Final Flow (End-to-End)
 ✔️ Alternatively, I can configure Webhooks or manually update the Git repository — but using Image Updater is the best practice. 
 --------------
 
-20.explain about Taints, tolerations, and node selectors in kubernets
+## 20.explain about Taints, tolerations, and node selectors in kubernets
 👉 for scheduling pods and how you can control which Pod runs on which Node using:
 ✅ Taints✅ Tolerations✅ Node Selectors
 👉 In Kubernetes, you have a cluster with multiple Nodes.
