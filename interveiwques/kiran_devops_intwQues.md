@@ -437,7 +437,8 @@ Step 7: Final Flow (End-to-End)
 -------------
 
 ## 19.How does Argo CD detect when an image is updated?
- In a production setup, Argo CD does not automatically detect image updates by default.
+
+In a production setup, Argo CD does not automatically detect image updates by default.
 ✔️ However, to enable automatic image updates, I use Argo CD Image Updater.
 ✔️ This tool continuously monitors the image registry (Docker Hub/ECR).
 ✔️ Whenever a new image is pushed, it automatically updates the deployment without any manual changes.
@@ -582,10 +583,11 @@ I use Node Affinity instead of Node Selectors for flexible deployments.
 ✅ Deploy databases only on high-storage Nodes.
 ✅ Ensure high availability in production.
 ✔️ This method improves security, resource optimization, and high availability.
+
 -------------
 	part -2
 
-➢ How to give access to Azure VM to a user for a limited time?
+How to give access to Azure VM to a user for a limited time?
 Method 1: Using Azure RBAC (Role-Based Access Control)
 Go to Azure Portal → VM → Access control (IAM).
 Click Add Role Assignment → Select "Virtual Machine User Login" role.
@@ -596,7 +598,7 @@ The user can connect via Azure Portal (Browser-based RDP/SSH).
 Disable Bastion access after the required time.
 --------
 
-➢ How to connect to kubernetes services if you don't have any VM?
+How to connect to kubernetes services if you don't have any VM?
 1.Using Cloud Shell Azure
 az aks install-cli  # Install kubectl
 az aks get-credentials --resource-group <rg-name> --name <aks-name>
@@ -604,7 +606,7 @@ kubectl get pods -A
 2.Using External Load Balancer or Ingress (If the service is exposed externally)
 --------
 
-➢ SSL, TLS Explain in detail?
+SSL, TLS Explain in detail?
 SSL (Secure Sockets Layer)?
 SSL is an older cryptographic protocol used for secure communication over the internet.
 It encrypts data between the client and server to prevent eavesdropping and tampering
@@ -612,15 +614,15 @@ It encrypts data between the client and server to prevent eavesdropping and tamp
 TLS is the successor of SSL with stronger encryption and security.( advance of ssl)
 ------------
 
-➢ Cosmos DB?
+Cosmos DB?
 Azure Cosmos DB is a fully managed, globally distributed NoSQL database service designed for high performance and low latency.
 -------------
 
-➢ Private Endpoints?
+Private Endpoints?
 A Private Endpoint is a network interface that allows private access to Azure services over a private IP in your VNet, eliminating public exposure.
 -----------
 
-➢ What all can be stored in the Azure KeyVault & how can we retrieve them?
+What all can be stored in the Azure KeyVault & how can we retrieve them?
 Azure Key Vault is a secure secrets management service that allows you to store and manage sensitive information such as:
 🔹 Secrets – API keys, connection strings, passwords.
 🔹 Keys – Encryption keys (RSA, EC, AES) for data protection.
@@ -629,11 +631,11 @@ Using Azure CLI:
 az keyvault secret show --vault-name <your-keyvault-name> --name <your-secret-name>
 ---------------
 
-➢ C name record?
+C name record?
 A CNAME (Canonical Name) record is a DNS record that maps an alias (subdomain) to another domain name.
 --------------
 
-➢ Real time usage of Kubernetes Cluster?
+Real time usage of Kubernetes Cluster?
 Use Cases of Kubernetes in Real-Time
 Microservices Deployment – Runs multiple independent services (e.g., Netflix, Amazon).
 CI/CD Automation – Deploys applications using Helm and ArgoCD.
@@ -641,8 +643,8 @@ Scalable Web Applications – Handles traffic spikes (e.g., E-commerce websites)
 Multi-Cloud & Hybrid Deployments – Works across AWS, Azure, and GCP
 --------------
 
-➢ What is the use of Kubelet & Kube proxy?
- Kubelet (Node Agent)
+What is the use of Kubelet & Kube proxy?
+Kubelet (Node Agent)
 Runs on each node and ensures the containers are running properly.
 Communicates with the API server and enforces configurations.
 Monitors health and restarts failed pods.
@@ -653,8 +655,8 @@ Supports service discovery and load balancing inside the cluster.
 Implements iptables or IPVS for packet forwarding.
 ------------
 
-➢ How can you ensure safety on Kubernetes Cluster?
- 1. Use RBAC (Role-Based Access Control)
+How can you ensure safety on Kubernetes Cluster?
+1. Use RBAC (Role-Based Access Control)
 Restrict who can perform actions in the cluster.
 2. Enable Network Policies
 Restrict communication between pods.
