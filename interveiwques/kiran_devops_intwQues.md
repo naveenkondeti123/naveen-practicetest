@@ -176,6 +176,7 @@ File Name: configure-nginx.yml
 ✅ Installs Nginx on the target servers.
 ✅ Copies a custom configuration file.
 ✅ Restarts the Nginx service.
+--
 Summary of Tasks Automated Using Ansible
 	Task Automated	Purpose
 ✅ Application Deployment	Automate Java, Python, Node.js deployments.
@@ -201,6 +202,7 @@ Summary of Tasks Automated Using Ansible
 🦠 Outdated dependencies.
 🔥 Misconfigured container images.
 ✅ Where is the Trivy Report Stored?= The Trivy report is stored in → Jenkins → Build → Artifacts → trivy-report.txt
+
 ------------------
 
 ## 9.How did you optimize CI/CD to reduce deployment time by 30%?
