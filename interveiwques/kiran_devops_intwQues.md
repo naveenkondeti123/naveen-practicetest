@@ -1022,11 +1022,11 @@ Kubelet (Node Agent)
 Runs on each node and ensures the containers are running properly.
 Communicates with the API server and enforces configurations.
 Monitors health and restarts failed pods.
-
 Kube Proxy (Networking Manager)
 Maintains network rules and routes traffic between pods and services.
 Supports service discovery and load balancing inside the cluster.
 Implements iptables or IPVS for packet forwarding.
+
 ------------
 
 113. How can you ensure safety on Kubernetes Cluster?
