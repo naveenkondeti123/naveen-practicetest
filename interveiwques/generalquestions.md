@@ -1,0 +1,2 @@
+## 1.We can automatically recover a failed VM in Azure using availability features, monitoring alerts, and auto-healing mechanisms like VM Scale Sets and Azure Automation. 
+use VM Scale Sets with health probes for automatic recovery, and Azure Monitor with alerts and Automation Runbooks to detect failures and trigger actions like VM restart or recreation, ensuring high availability.
