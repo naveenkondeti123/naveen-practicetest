@@ -6,7 +6,7 @@ fetch application owner details - it willl Get owner details
 email outlook -send email for  true =create evant(a/dny)  false = create update event (approve/deny)
  connections = outlook / event hub (Azure Event Hubs is a big data streaming platform used to ingest and process millions of events per second in real time.)
 
-
+![image alt](https://github.com/naveenkondeti123/naveen-practicetest/blob/e31af076a3024bc6c5d3f87397ab503a435b3726/WhatsApp%20Image%202026-03-31%20at%2010.00.28%20AM.jpeg)
 
                          event hub (when events are avilable in)
                             |
