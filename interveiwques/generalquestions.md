@@ -42,4 +42,16 @@ use service meshh like istio
 deploy applicayions like argocd
 synchornise secrtes across cluster using vaults
 
-## 10.
+## 10.examples of k8s crashloopbackoff erros
+1.failed due to resourcelimts - increase the limits of the pod  in deployment.yaml ( replica=3 but only 2pods runing as resoucres exahusted)
+2.java jdbc error -unable to connect to database or another microservice (in image we have appliaction we created from it has to connect to database unable to connect)
+3.init container - 
+4.healthcek failed
+5.runtime error -   
+
+## 11.examples of image pull error
+1.missed permisions due to unable to pull image from hub (use c0rrect credentials)
+2.due to inavlid tag name -(use correct tag )
+3.imagepullsecrets -proper rbac roles missing
+
+
