@@ -25,4 +25,21 @@ kubernets data stored inside a pod is lost when a pod is deleted or restarted in
 ## 6. what are custom resource definitions CRDs
 a crd extend k8s by allowing user to define their own api objects. this enbaless k8s to manage new type of resources beyond the built in one like pods services and deployments. but some times there may be conditions build int may not be enough so the crds define custom objects that k8s understand and manage like native built in recourecs
 
-## 7.
+## 7.kubentes operator define?
+a k8s opreator is a advanced managed custom controller that automaates the lifecycle managment of comple sapplications such as databeses ques and monitoring tools. operatoer extend the k8s by crds to define and automaate application specific tasks.used for manageing the sateful applications
+
+## 8.your cluster is running slow how do optimize it
+high resourc usage 
+bottle neck
+mis configuations in pods storage networking
+1.check the rsource usgae in nodes and use cluster autoscale for adding nodes
+2.enable autoscaling like hpa based on cpu metrics it wil add pods
+3.optimize incoming tarffic by uisng service 
+4.remove unsued resources like unused pods or jobs
+
+## 9.how do you handle mmuti-cluste k8s deployment
+use service meshh like istio
+deploy applicayions like argocd
+synchornise secrtes across cluster using vaults
+
+## 10.
