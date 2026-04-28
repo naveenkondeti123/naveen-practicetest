@@ -54,4 +54,20 @@ synchornise secrtes across cluster using vaults
 2.due to inavlid tag name -(use correct tag )
 3.imagepullsecrets -proper rbac roles missing
 
+12.Cordon in pods means it will not allow pods shedule on the nodes (we use this in case of cpu crossed 90 % scenarios)Cordon is used to mark a node as unschedulable so that no new pods are deployed on it, while existing pods continue running. It’s typically used before draining a node during maintenance
+
+12.Secure context it is used in pods Security context in Kubernetes defines how containers run securely, such as running as non-root, dropping Linux capabilities, and preventing privilege escalation. I use it to enforce least privilege and harden workloads in AKS
+
+13.maxSurge controls how many extra pods are created during deployment, while maxUnavailable defines how many pods can go down. Together they help achieve zero-downtime deployments in Kubernetes.
+
+14.Calico in aks we define for ingress and egress trafic and communication is enabled by using pod to pod by using calico networkploices and it's uses matchlabes conect to talk frontend pods communicate with backend. And traffic is encrypted by using istio service mesh(mlts)
+
+15.PDB in AKS ensures high availability during planned disruptions like node upgrades. For example, I configure minAvailable to make sure a minimum number of pods are always running during maintenance
+
+16.terraform deadlock usually refers to state locking issues or circular dependencies. I’ve handled state lock issues using force-unlock and avoided conflicts by ensuring only one pipeline runs at a time.
+
+17.Pipeline variables are defined within a specific pipeline and used for local configurations, while variable groups are centralized and reusable across multiple pipelines. In AKS deployments, I use pipeline variables for dynamic values like image tags and variable groups for shared configurations and secrets, often integrated with Azure Key Vault
+
+18.Trunk-based development is a practice where developers frequently merge small changes into a single main branch using short-lived branches. In Azure Repos, I enforce it using branch policies like mandatory PRs, build validation, and restricted direct pushes. I also promote small PRs, CI on every commit, and feature flags to safely merge incomplete features
+
 
