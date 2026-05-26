@@ -70,4 +70,6 @@ synchornise secrtes across cluster using vaults
 
 18.Trunk-based development is a practice where developers frequently merge small changes into a single main branch using short-lived branches. In Azure Repos, I enforce it using branch policies like mandatory PRs, build validation, and restricted direct pushes. I also promote small PRs, CI on every commit, and feature flags to safely merge incomplete features
 
+19.terraform taint : if a resource is marked as tainted , terraform will destroy it amd recreate it during next apply eevn if its configuration has not changed.this is helpful when a resiurce is in a bad state but u dont wnat to change ist congigratuion, 
+
 
