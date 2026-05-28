@@ -93,8 +93,8 @@ A reverse proxy is a server that sits in front of backend servers and forwards c
 🔹Reconciliation in GitOps(argocd) is the process of continuously ensuring the actual system state matches the desired state defined in Git.
 
 ## 15.types of docker image polices
-| Policy        | Behavior                        
-1. Always       | Always pull from registry      (always pull latest tag image)
-2.IfNotPresent  | Pull only if image absent locally (local not presnt then only pull form remote repo)
-3.Never         | Never pull image          (never pull inage from repo so it fetch localy)  
+Policy          Behavior                        
+1. Always        Always pull from registry      (always pull latest tag image)
+2.IfNotPresent   Pull only if image absent locally (local not presnt then only pull form remote repo)
+3.Never          Never pull image          (never pull inage from repo so it fetch localy)  
 
