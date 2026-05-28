@@ -8,15 +8,19 @@ refer linuvxm.tf for answer
 A.Choose minimal base images like alpine Redure layers by docker chace layering reducing the layer reduce sizeRemove unwanted packeges and unused files Use multistage build one stage build and copy necessary arttifacts to final stageUsing distroles images reduce size oas the image will size decrease 
 
 ## 3.how you write muti stage docker file for a pom.xml build and exuction stages
-#Stage 1: BuildFROM node: 18-alpine AS builder
-WORKDIR /appCOPY package.json./
+#Stage 1: Build
+FROM node: 18-alpine AS builder
+WORKDIR /app
+COPY package.json./
 RUN npm install COPY .
 RUN npm run build
 #Stage 2: Production
-FROM node:18-alpine AS productionWORKDIR /app
+FROM node:18-alpine AS production
+WORKDIR /app
 COPY-from-builder/app/dist/dist
 COPY-from-builder/app/package.json./RUN ppm install production
 EXPOSE 8080CMD ["node", "dist/server.js"]
+
 Explanation:The first stage (builder) installs dependencies and builds the application.The second stage (production) copies only the built files and production dependencies, resulting in reduceed image4.describe your deployment.yaml file for aks for production (use resources limits and helth probes)
 
 ## 5.how would a traffic req flow from loadbalcer reach to pods in aks
