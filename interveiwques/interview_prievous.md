@@ -21,7 +21,9 @@ COPY-from-builder/app/dist/dist
 COPY-from-builder/app/package.json./RUN ppm install production
 EXPOSE 8080CMD ["node", "dist/server.js"]
 
-Explanation:The first stage (builder) installs dependencies and builds the application.The second stage (production) copies only the built files and production dependencies, resulting in reduceed image4.describe your deployment.yaml file for aks for production (use resources limits and helth probes)
+Explanation:The first stage (builder) installs dependencies and builds the application.The second stage (production) copies only the built files and production dependencies, resulting in reduceed image
+
+## 4.describe your deployment.yaml file for aks for production (use resources limits and helth probes)
 
 ## 5.how would a traffic req flow from loadbalcer reach to pods in aks
 in our eeh application when a user intiates a request 
