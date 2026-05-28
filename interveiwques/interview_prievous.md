@@ -18,7 +18,8 @@ RUN npm run build
 FROM node:18-alpine AS production
 WORKDIR /app
 COPY-from-builder/app/dist/dist
-COPY-from-builder/app/package.json./RUN ppm install production
+COPY-from-builder/app/package.json./
+RUN ppm install production
 EXPOSE 8080CMD ["node", "dist/server.js"]
 
 Explanation:The first stage (builder) installs dependencies and builds the application.The second stage (production) copies only the built files and production dependencies, resulting in reduceed image
@@ -44,7 +45,9 @@ user -> istio -> service -> uderlaying pods(schemaregistrey) -  kafka applicatio
 
 ## 10.How do u design a multiple env deployment stratagey in terraform root level with module approach By using the reusable modules and separately using the workspaces we can deploy same file to different environments  Can you explain 
 vm deployment in terraform with forech concept 
-Module "linuxvm"{for_each = var.env == "dev" ? Local.dev.linuxvm : local.linuxvm.prod
+Module "linuxvm"{
+ for_each = var.env == "dev" ? Local.dev.linuxvm : local.linuxvm.prod
+ source="app.terraform.io/se-linuxvm/azurerm"
    vm-size=each.value.usr-vm-size 
    }
 Local { 
