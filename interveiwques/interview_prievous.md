@@ -82,6 +82,8 @@ A StatefulSet manages applications that need:
 a.Persistent storage
 b.Stable identity
 Deployment is used for stateless applications where pods are interchangeable, while StatefulSet is used for stateful applications requiring stable identity, ordered deployment, and persistent storage.
+eg:deployment= pods (statless)
+eg:statful =database (staeful)
 
 ## 14. Git vs GitHub
 Git is a version control tool to track code changes, while GitHub is a cloud platform to store and collaborate on Git repositories.
@@ -89,4 +91,10 @@ Git is a version control tool to track code changes, while GitHub is a cloud pla
 A reverse proxy is a server that sits in front of backend servers and forwards client requests to them, improving security, load balancing, and performance.
 
 🔹Reconciliation in GitOps(argocd) is the process of continuously ensuring the actual system state matches the desired state defined in Git.
+
+## 15.types of docker image polices
+| Policy        | Behavior                        
+1. Always       | Always pull from registry      (always pull latest tag image)
+2.IfNotPresent  | Pull only if image absent locally (local not presnt then only pull form remote repo)
+3.Never         | Never pull image          (never pull inage from repo so it fetch localy)  
 
