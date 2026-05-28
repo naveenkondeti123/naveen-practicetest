@@ -969,35 +969,6 @@ steps:
 Devops Interview questions.txt
 Displaying Devops Interview questions.txt.
 
-106. How to give access to Azure VM to a user for a limited time?
-Method 1: Using Azure RBAC (Role-Based Access Control)
-Go to Azure Portal → VM → Access control (IAM).
-Click Add Role Assignment → Select "Virtual Machine User Login" role.
-Assign the role to the user and set an expiration date (requires PIM).
-Method 2: Using Azure Bastion
-Deploy Azure Bastion in your VNet.
-The user can connect via Azure Portal (Browser-based RDP/SSH).
-Disable Bastion access after the required time.
---------
-
-107. How to connect to kubernetes services if you don't have any VM?
-1.Using Cloud Shell Azure
-az aks install-cli  # Install kubectl
-az aks get-credentials --resource-group <rg-name> --name <aks-name>
-kubectl get pods -A
-2.Using External Load Balancer or Ingress (If the service is exposed externally)
---------
-
-108. SSL, TLS Explain in detail?
-SSL (Secure Sockets Layer)?
-SSL is an older cryptographic protocol used for secure communication over the internet.
-It encrypts data between the client and server to prevent eavesdropping and tampering
- TLS (Transport Layer Security)?
-TLS is the successor of SSL with stronger encryption and security.( advance of ssl)
-------------
-
-109. Cosmos DB?
-Azure Cosmos DB is a fully managed, globally distributed NoSQL database service designed for high performance and low latency.
 -------------
 
 110. What all can be stored in the Azure KeyVault & how can we retrieve them?
