@@ -29,6 +29,7 @@ f ind /path/to/search -type f -mmin -10 (use find command path -type=files and m
 
 15.find /var/log -type f -size +100M (files laeger tham 100mb)
 16.find /var/log -type f -name "*.log" -mtime +30 -delete (files older than 30d)
+
 17.#!/bin/bash
 usage=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
 if [ "$usage" -gt 80 ]
@@ -37,6 +38,7 @@ then
 else
     echo "Disk usage is normal"
 fi
+
 18.#!/bin/bash
 
 if pgrep nginx > /dev/null
@@ -45,7 +47,14 @@ then
 else
     echo "Nginx is not running"  (process running)
 fi
-19.#!/bin/bash
 
+19.#!/bin/bash
 tar -czf backup.tar.gz /home/app  (dir backup)
+
 20.find / -type f -exec du -h {} + | sort -rh | head -10 (lrge 10 files)
+
+21. #!/bin/bash
+SOURCE="file1.txt"
+DESTINATION="file2.txt"
+cp "$SOURCE" "$DESTINATION"  # or (cat file1.txt > file2.txt)
+echo "File copied successfully."
