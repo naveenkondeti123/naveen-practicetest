@@ -74,27 +74,41 @@ Migrating data from on-premises environment to the Azure cloud involves several 
 8. Monitoring and Logging Service:Collects logs and metrics for system health and performance monitoring.
 end kanerika questions
 -----------------
+LTM mindtree gcp devops
+## 1.can you explain how do you handle mutliproject gcp enviroments or large organisations
+## 2.how do u condtionnally create bastionhost by terraform for non-prod
+## 3.how will u consume the vpc values from anorther terraform state which is stored in bucket (remote backend)
+## 4.how will u migrate a legacy vm based application to GKE with minimum downtime
+## 5.how will u use the same reusable terraform code for mutiple enviorments write code
+--------
+waferwirecloud tech L1
+## 1.what are the main services in azure devops ADO
+## 2.what is CI/CD
+## 3.what type of deployments used eariler 
+## 4.what are microsft hosted and self hosted agents
+## 5.can you write a pipline of your project yaml based
+## 6.can u explain the type of piplines (classic UI/yaml)
+## 7.what u have done by using docker what are the images u are using and how are u handling the docker isuues
+## 8.what are the types of docker networks 
+   bride host overlay maclavn none
+## 9.write a sample docker file
+## 10.suppose u have noticed that container keeps restarting what are the steps u follow to troubleshoot
+## 11.explain docker lifecyle creation of image to deploy it to ACR
+## 12.what is the diffrence between docker and kubernetes
+## 13.when u notice prod deploymet is failed due to some isuue u have a fix what is the process u follow on that 
+## 14.if a pod is failing how will u troublesoot steps by step
+## 15.have u worked earlier in PDB pod disruption bugets isuues and how u will reslove
+## 16.u noticed helm upgeade isuues and failed due to helm upgarde
+## 17.what is the kuubernets services
+## 18.can u explain about istio ingress
+## 19.can u write kubenrts architure/components
+## 20.do u have experiance in arm templates/biceps
+## 21.what is vnet and diff btwn vent and subnet
+## 22.what is a public ip and private ip
+## 23.what is NSG and what is the dif between firewall and nsg
+## 24.what azure networking services used in ur pordution env
+## 25.
+-----
 
-genral questoons
-## 13.Explanation of StatefulSet vs Deployment in AKS
-A Deployment manages stateless applications where pods are identical and interchangeable.
-A StatefulSet manages applications that need:
-a.Persistent storage
-b.Stable identity
-Deployment is used for stateless applications where pods are interchangeable, while StatefulSet is used for stateful applications requiring stable identity, ordered deployment, and persistent storage.
-eg:deployment= pods (statless)
-eg:statful =database (staeful)
-
-## 14. Git vs GitHub
-Git is a version control tool to track code changes, while GitHub is a cloud platform to store and collaborate on Git repositories.
-🔹 Reverse Proxy
-A reverse proxy is a server that sits in front of backend servers and forwards client requests to them, improving security, load balancing, and performance.
-
-🔹Reconciliation in GitOps(argocd) is the process of continuously ensuring the actual system state matches the desired state defined in Git.
-
-## 15.types of docker image polices
-Policy          Behavior                        
-1. Always        Always pull from registry      (always pull latest tag image)
-2.IfNotPresent   Pull only if image absent locally (local not presnt then only pull form remote repo)
-3.Never          Never pull image          (never pull inage from repo so it fetch localy)  
+ 
 
