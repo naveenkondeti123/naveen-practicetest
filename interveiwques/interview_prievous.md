@@ -107,8 +107,34 @@ waferwirecloud tech L1
 ## 22.what is a public ip and private ip
 ## 23.what is NSG and what is the dif between firewall and nsg
 ## 24.what azure networking services used in ur pordution env
-## 25.
 -----
-
- 
-
+wct L2
+## 1.what have u done on aks in your projrct
+## 2.what is the diff bewteen stateless and statelful
+## 3.what is the basic element in aks 
+## 4.how many master nodes in your cluster
+## 5.how imanges are mainateiend in acr 
+## 6.how frequntely ur deployment will go live
+## 7.why the realses are happeing in ur new relase for live is it due to any vunarablities isuues
+## 8.what is diff between ACR and MCR
+## 9.how many docker imanges u are maintaining
+## 10.u have deployed the release in aks and have faced error
+## 11.what is the use of sidecar and y u are using this
+## 12.what is the use of the dr traffic diversion or anyother usecase
+## 13.can u explain the pipeline stages in ur project and artifact storage
+## 14.when u raise PR request the chnges made where will be validated/checked and triggers will run and the chages u made in brach how to cnfrm they are working 
+## 15.what are the barnching startagies u follow
+## 16.ur prod has a hotfix and dev is not having this cahges and behined the prod how u fix these chages to dev
+## 17.bash script to copy files from file1 to file2
+## 18.what is the diff between service principal and manged identity 
+## 19.have u worked on monitirong tools and what u worked on montioring and what is displayed in that dashboard (metrics,pipline success/failure,cpu,mem)
+## 20.when u have noticed a latency in aplication what are the checklits u do to reslove it
+## 21.pod is up and running but my appliaction ins not accesible to some of the user what might the isuue (firewall,netroking isuues)
+## 22.what is the dif between frnotdoor and application gateway
+## 23.have u worked on vunarabilities sfi(sequrity feature initiative)
+## 24.u are running a build pipline and taking much time and how can u readuce the build time
+## 25.can u explain the satefile and have uu worked on terrafom modules
+## 26.what is the terraform provider for GCP
+## 27.what happens u run terraform plan and how u seperate the envirmonets in terrafom
+## 28.will u manitain same statefile for all the enviorments or same satefile
+## 29.a resource in deleted in azure(frm portal) dev env but its is not removed from satefile what happens
