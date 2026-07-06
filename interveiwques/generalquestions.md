@@ -70,6 +70,27 @@ synchornise secrtes across cluster using vaults
 
 18.Trunk-based development is a practice where developers frequently merge small changes into a single main branch using short-lived branches. In Azure Repos, I enforce it using branch policies like mandatory PRs, build validation, and restricted direct pushes. I also promote small PRs, CI on every commit, and feature flags to safely merge incomplete features
 
-19.terraform taint : if a resource is marked as tainted , terraform will destroy it amd recreate it during next apply eevn if its configuration has not changed.this is helpful when a resiurce is in a bad state but u dont wnat to change ist congigratuion, 
+19.terraform taint : if a resource is marked as tainted , terraform will destroy it amd recreate it during next apply eevn if its configuration has not changed.this is helpful when a resiurce is in a bad state but u dont wnat to change its congigratuion, 
+
+## 20.Explanation of StatefulSet vs Deployment in AKS
+A Deployment manages stateless applications where pods are identical and interchangeable.
+A StatefulSet manages applications that need:
+a.Persistent storage
+b.Stable identity
+Deployment is used for stateless applications where pods are interchangeable, while StatefulSet is used for stateful applications requiring stable identity, ordered deployment, and persistent storage.
+eg:deployment= pods (statless)
+eg:statful =database (staeful)
+
+## 21. Git vs GitHub
+Git is a version control tool to track code changes, while GitHub is a cloud platform to store and collaborate on Git repositories.
+🔹 Reverse Proxy
+A reverse proxy is a server that sits in front of backend servers and forwards client requests to them, improving security, load balancing, and performance.
+🔹Reconciliation in GitOps(argocd) is the process of continuously ensuring the actual system state matches the desired state defined in Git.
+
+## 22.types of docker image polices
+Policy          Behavior                        
+1. Always        Always pull from registry      (always pull latest tag image)
+2.IfNotPresent   Pull only if image absent locally (local not presnt then only pull form remote repo)
+3.Never          Never pull image          (never pull inage from repo so it fetch localy) 
 
 
