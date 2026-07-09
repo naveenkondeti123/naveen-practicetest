@@ -164,4 +164,22 @@ In our project, we use organization-approved golden VM images from the Azure Com
 ## 22. what is the base image used in docker file and perodical image updates
 ## 23.kubernetes cluster upgardes
 -----------
-
+syren cloud tech
+## 1.u are managing terraform for diffrent envs each env has its own vpc subnets and sg u wnat to resuse the same code and deploy seperate resources for as per      the env how will u structure terrafom code and state file for this
+## 2.we have a production sql data base it should not be deleted accedentally what action pevernts this in ur terafom code
+## 3.ur team has larage terrafom code bases modules for multile regions and applying cahnges taking longtime and ofen failes due to dependecies how u optimize       this in terraform
+## 4.is it possible to use temporary disk in azure to store data or not
+## 5.is it possible to enable NSG at Vnet level in azure or not
+## 6.imagine u are mangaing cloud insfrasture in azure and u need to provide remote access to a virtual machine for a 3rd party vendor that vendoer does not have    azure account and he should not given access to azure portal how ever they need to connect sequrely to that vm
+## 7.how can u enable avaialabilty set to exsisting virtual machine(appliction is running in vm) in ur enviroment
+## 8.u have a web appliction (web app) running on azure vm and ensure high avaialabilty and fault tolarance
+## 9.u are managing a critical azure vm that host a important web application to ensure business continuty and minimize incase of disaters what u can use for to     avoid this type of region wise outages for ur application
+## 10.u have different docker conatiners running different services u wnat to link them togehter so that they can communicate with each other
+## 11.u have a docker container whcih is running a webserver u want to access that webserver from ur hostmachine
+## 12.u want to run multiple instances of a docker container to handle the increasing traffic how can u do that
+## 13.u want to run a docker container on a server with limited resources how will u optamize that conatinaer for resorcing usage
+## 14.ur appliaction needs to handle continous deployment with minimal downtime u have defined a kubenrts deployment with 5 replicas how can u ensure that atlest    3 pods are always runnig even ur are updateing /upgarding on cluster level
+## 15.what are the all type of manifest we have in kubenrts
+## 16.u are palanning to cerate a new application for one of my devloper and i have given u the offical repo of that application i want to create helm templates     for that applications to deploy that application to kubenrts cluster 
+## 17.how to chek docker image size
+## 18.how do you check event log of a kubeernets pod
