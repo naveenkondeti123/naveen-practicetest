@@ -166,20 +166,82 @@ In our project, we use organization-approved golden VM images from the Azure Com
 -----------
 syren cloud tech
 ## 1.u are managing terraform for diffrent envs each env has its own vpc subnets and sg u wnat to resuse the same code and deploy seperate resources for as per      the env how will u structure terrafom code and state file for this
+terraform/
+│
+├── modules/
+│   ├── vnet/
+│   ├── subnet/
+│   └── nsg/
+├── dev/
+│   ├── main.tf
+│   ├── terraform.tfvars
+│
+├── qa/
+├── uat/
+└── prod/
+--
 ## 2.we have a production sql data base it should not be deleted accedentally what action pevernts this in ur terafom code
-## 3.ur team has larage terrafom code bases modules for multile regions and applying cahnges taking longtime and ofen failes due to dependecies how u optimize       this in terraform
+lifecycle {
+  prevent_destroy = true
+}
+## 3.ur team has larage terrafom code bases modules for multile regions and applying cahnges taking longtime and ofen failes due to dependecies how u optimize this in terraform
+"I split the infrastructure into reusable modules, maintain separate state files for independent components, use remote state, reduce unnecessary dependencies, and execute independent modules in parallel through the CI/CD pipeline."
 ## 4.is it possible to use temporary disk in azure to store data or not
+Yes, but only for temporary data like cache, swap, or temporary files. Temporary disks are not persistent and data is lost if the VM is restarted, redeployed, or moved.
 ## 5.is it possible to enable NSG at Vnet level in azure or not
-## 6.imagine u are mangaing cloud insfrasture in azure and u need to provide remote access to a virtual machine for a 3rd party vendor that vendoer does not have    azure account and he should not given access to azure portal how ever they need to connect sequrely to that vm
+No. NSGs can only be associated with a subnet or a network interface (NIC), not directly with a Virtual Network
+## 6.imagine u are mangaing cloud insfrasture in azure and u need to provide remote access to a virtual machine for a 3rd party vendor that vendoer does not have azure account and he should not given access to azure portal how ever they need to connect sequrely to that vm
+I would not provide Azure Portal access. Instead, I'd use Azure Bastion or VPN with a temporary local VM account, restrict access using NSGs to the vendor's public IP, and remove access once the work is completed
+
 ## 7.how can u enable avaialabilty set to exsisting virtual machine(appliction is running in vm) in ur enviroment
+It isn't supported directly. I would create a managed image or snapshot of the existing VM, deploy a new VM into the Availability Set, migrate the application, test it, and then decommission the old VM
+
 ## 8.u have a web appliction (web app) running on azure vm and ensure high avaialabilty and fault tolarance
-## 9.u are managing a critical azure vm that host a important web application to ensure business continuty and minimize incase of disaters what u can use for to     avoid this type of region wise outages for ur application
+I deploy multiple VMs across Availability Zones behind an Azure Load Balancer or Application Gateway, enable health probes, use VM Scale Sets for auto-healing and scaling, and configure Azure Monitor and Azure Site Recovery
+
+## 9.u are managing a critical azure vm that host a important web application to ensure business continuty and minimize incase of disaters what u can use for to avoid this type of region wise outages for ur application
+I use Azure Site Recovery for disaster recovery, Geo-Replication for databases, and Azure Front Door or Traffic Manager for automatic regional failover
+
 ## 10.u have different docker conatiners running different services u wnat to link them togehter so that they can communicate with each other
+Docker containers are isolated by default, so they cannot communicate unless they are connected to the same Docker network. In production, I create a user-defined bridge network and attach all related containers to that network. Docker provides built-in DNS resolution, so containers can communicate using their container names instead of IP addresses. For multi-container applications, I typically use Docker Compose, which automatically creates a common network for all services.
 ## 11.u have a docker container whcih is running a webserver u want to access that webserver from ur hostmachine
+docker run -d -p 8080:80 nginx (port forward)
 ## 12.u want to run multiple instances of a docker container to handle the increasing traffic how can u do that
+"If I'm using Docker on a single server, I can run multiple instances of the same container. Since each container cannot use the same host port, I expose them on different ports or use Docker Compose with multiple replicas. However, Docker alone doesn't provide automatic load balancing or auto-scaling. In production, I would deploy the application to Kubernetes using a Deployment with multiple replicas and expose it through a Kubernetes Service. If traffic increases further, I would configure a Horizontal Pod Autoscaler (HPA) to automatically scale the number of replicas
 ## 13.u want to run a docker container on a server with limited resources how will u optamize that conatinaer for resorcing usage
+If the server has limited CPU and memory, I optimize both the Docker image and the container runtime. First, I use a lightweight base image like Alpine or Distroless to reduce image size. I use multi-stage builds so only the application and required runtime are included in the final image. I remove unnecessary packages and files, and configure CPU and memory limits using Docker runtime options. I also configure health checks and monitor resource usage using docker stats. These optimizations reduce memory consumption, improve startup time, and prevent one container from consuming all server resource
 ## 14.ur appliaction needs to handle continous deployment with minimal downtime u have defined a kubenrts deployment with 5 replicas how can u ensure that atlest    3 pods are always runnig even ur are updateing /upgarding on cluster level
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+spec:
+  minAvailable: 3
+  selector:
+    matchLabels:
+      app: webapp
 ## 15.what are the all type of manifest we have in kubenrts
+Pod
+Deployment
+ReplicaSet
+StatefulSet
+DaemonSet
+Service
+Ingress
+ConfigMap
+Secret
+PVC
+PV
+StorageClass
+Namespace
+HPA
+NetworkPolicy
+ServiceAccount
+RoleBinding
+ClusterRole
+ClusterRoleBinding
+PodDisruptionBudget
 ## 16.u are palanning to cerate a new application for one of my devloper and i have given u the offical repo of that application i want to create helm templates     for that applications to deploy that application to kubenrts cluster 
+I analyze the application, identify ports, environment variables, secrets, storage, and dependencies. Then I create a reusable Helm chart with templates for Deployment, Service, Ingress, ConfigMap, Secret, HPA, and PDB. I maintain separate values files for Dev, QA, UAT, and Production and deploy using helm upgrade --install
 ## 17.how to chek docker image size
+docker images ls
 ## 18.how do you check event log of a kubeernets pod
+kubectl get events
