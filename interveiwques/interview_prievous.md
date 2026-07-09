@@ -138,3 +138,30 @@ wct L2
 ## 27.what happens u run terraform plan and how u seperate the envirmonets in terrafom
 ## 28.will u manitain same statefile for all the enviorments or same satefile
 ## 29.a resource in deleted in azure(frm portal) dev env but its is not removed from satefile what happens
+---- WCT L3
+## 1.what kind of changes and roles and resposibilites in your telicom project
+## 2.is the deployemnt pipline is automated or manual
+## 3.what kind of changes u have done in the infra piplines and have u written any pilines for infra
+## 4.any esclations u resloved and appreciations u revived in this project
+## 5.what is the code base used in this project
+## 6.do u know how to build java sloutions in pilpeines and how mvn build stage works
+## 7.have u cerated any agent and how its created and where its crated and what is the SKU and OS of this agent
+## 8.what is the reason of using custom based images for cretaing vms and advantages over customized images and have u ever used standard  open market linux based image instead of custom image
+## 9.what are we acheiving by using these custom images instead of standard images 
+## 10.are ur agents scalae up or fixed aganet vm
+## 11.what is the use of using custom images in org why cant we use the docker build to containerize the image using dockerfile and use that image
+In our project, we use organization-approved golden VM images from the Azure Compute Gallery and approved container base images from Azure Container Registry instead of public marketplace images. These images are preconfigured with the required operating system version, security patches, monitoring agents, endpoint protection, certificates, logging configurations, and company compliance settings. This ensures consistency across environments, reduces deployment time, minimizes configuration drift, and satisfies healthcare compliance requirements such as HIPAA. For containerized applications, we use approved base images from ACR because they are security-scanned, version-controlled, and maintained by the platform team. Application teams only add their application layer, resulting in faster builds, standardized environments, and a reduced attack surface while avoiding repeated installation of common dependencie
+## 12.how image tags configured in your project and docker image tag patteren how u are updating the docker images version tag to latest(artifact id,build no,image id)
+## 13.what is the image promotion tag for docker images used in project
+## 14.what kind of issues u troubleshoot using aks
+## 15.what happens if we wont configure resource limits and what kind of limits we configure
+## 16.do u have  exp on configureing ingress and service and what is the use of ingress
+## 17.when u mention lodabalancer in svc file what will happen will cerate a public ip or private ip
+## 18.do u know serices of public and private ips and wht are the adv for  using the private ips
+## 19.where u will store the keys public and private and experiance in key vault
+## 20.any ai tools used in your day to day activites
+## 21.what is sequrity in outside devops 
+## 22. what is the base image used in docker file and perodical image updates
+## 23.kubernetes cluster upgardes
+-----------
+
