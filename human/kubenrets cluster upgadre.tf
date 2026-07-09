@@ -47,3 +47,36 @@ spec:
         ports:
         - containerPort: 80
   -----
+**maxSurge is not part of the PDB.
+It is used during Deployment.yml
+1.rolling updates, or2.AKS node pool upgrades. ( differnt purpose)
+In a Kubernetes Deployment.yml
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 1
+--
+In AKS, maxSurge is configured on the node pool, not in any YAML. (in azure portal pass through cli or in  aks cluster upgardes )
+az aks nodepool update \
+  --resource-group myRG \
+  --cluster-name myAKS \
+  --name nodepool1 \
+  --max-surge 33%
+
+aks cluster upgardes
+AKS Cluster
+   ↓
+Node Pools
+   ↓
+Select Node Pool
+   ↓
+Upgrade Settings
+   ↓
+Max Surge
+--
+1.What is the difference between maxUnavailable in a PDB and maxUnavailable in a Deployment?"
+a.PDB maxUnavailable protects application availability during voluntary disruptions like node drains or AKS upgrades.
+b.Deployment maxUnavailable controls how many pods can be unavailable during a rolling deployment of a new application version.
+c.Deployment maxSurge controls how many extra pods can be created during that rolling deployment.
+d.AKS node pool maxSurge controls how many extra nodes AKS creates while upgrading a node pool. This is separate from Kubernetes Deployment settings.
