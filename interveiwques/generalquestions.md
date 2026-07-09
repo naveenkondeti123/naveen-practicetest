@@ -91,6 +91,15 @@ A reverse proxy is a server that sits in front of backend servers and forwards c
 Policy          Behavior                        
 1. Always        Always pull from registry      (always pull latest tag image)
 2.IfNotPresent   Pull only if image absent locally (local not presnt then only pull form remote repo)
-3.Never          Never pull image          (never pull inage from repo so it fetch localy) 
+3.Never          Never pull image          (never pull inage from repo so it fetch localy)
+
+## 23.How to add manual approvers in piplines azurePipelines → Environments → Select Environment→ Approvals and Checks→ Add ApproversAdding branch protection policies Repos → Branches → Branch Policies
+GitHub actions branch protection rules Settings → Branches
+In GitHub actions aadd approvers /reviewsSettings → Environments → Create Environment→ Required Reviewers
+
+## 24.What are Managed Identities and when would you use them 
+Managed Identity is an Azure AD identity automatically managed by Azure for resources like AKS, VMs, or Function Apps. It is used to securely access Azure services without storing credentials. We commonly use it for AKS-to-ACR integration, VM-to-Key Vault access, and secure authentication between Azure services.”Managed idetity will cretaea role and this role is used to connect resources az role assignment create \  --assignee <identity> \  --role AcrPull
+Rbac is used for users to access resources Managed idetity is given to a resource which can be used to access others Azure services
+AcrPull is an Azure RBAC role assigned to the AKS Managed Identity so the cluster can authenticate and pull container images securely from Azure Container Registry.”
 
 
