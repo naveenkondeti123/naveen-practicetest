@@ -105,4 +105,19 @@ az role assignment create \ 
 Rbac is used for users to access resources Managed idetity is given to a resource which can be used to access others Azure services
 AcrPull is an Azure RBAC role assigned to the AKS Managed Identity so the cluster can authenticate and pull container images securely from Azure Container Registry.”
 
+## 25.You are unable to SSH into an Azure Linux VM, but the VM is in a Running state and accessible from the Azure Portal. How do you install a package on the VM without using SSH?
+1.azure bastion 2.serial consle 3.run command 4.
+Azure Portal
+    ↓
+Virtual Machine
+    ↓
+Operations
+    ↓
+Run Command ( u can install scripts in a vm from azure portal)
+2.Azure Portal
+↓
+VM
+↓
+Serial Console
+If SSH isn't available but the VM is running, my first choice is Azure Run Command because it lets me execute shell commands remotely through the Azure Portal or Azure CLI without SSH access. For larger or repeatable installations, I'd use the Custom Script Extension. If I need to troubleshoot the VM itself, I can use the Azure Serial Console, and if Azure Bastion is configured, I can connect securely through the portal. Before that, I'd also verify NSG rules, the SSH service, and firewall settings to determine why SSH is failing.""
 
