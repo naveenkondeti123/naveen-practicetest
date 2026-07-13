@@ -1,5 +1,67 @@
-Kanerika devops inv
+## PWC
+## 1.how are u creating the services like vnet subnets?
+## 2.can u tell me what are the steps involed in terraform for deploying two services and how are u gng to do it
+## 3.can u tell me the stages in cicd for application deployement end to end
+## 4.can u tell me realtime production isuue which occured and how u have solved it
+## 5.how ur single piplines deployed to multiple env stages and how its depends on other env (prod has a depends on  dev)
+## 6.can u explain the structure/folders of terraform pipline 
+## 7.can u explain diff between managed identity and service principle where they are used
+## 8.what kind of isuues u got while deploying terrform
+## 9.when u have a vm already existing in azure and u have excuting terrform plan what error ul get
+## 10.what stages include in docker file and what is the base image and what commands u have used and howwill u pass build stage file to relase
+In our project, we use multi-stage Docker builds to reduce the final image size and improve security. Typically, the Dockerfile consists of a build stage and a runtime (release) stage. The build stage compiles the application, and the runtime stage contains only the files required to run the application. We copy the build artifacts from the build stage to the runtime stage using the COPY --from=<stage> command
+## build stage
+FROM maven:3.9-eclipse-temurin-17 AS builder
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package
+## release stage
+FROM eclipse-temurin:17-jre
+WORKDIR /app
+COPY --from=builder /app/target/app.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
+## 11.if u wnat to check a service is up and running and how u check and if u wnat to check cpu and memeoray 
+## 12.how the blue green deploymnet will work
+## 13.u have deployed a deployment latest and u face a issue u rollback to previous version (have to use kubectl undo rollout deployment v2) and how are u storing the stable verison as a tag/artifact/commitid nameing and somewhwere u have to metion the artifact /tag name wehere it will
+In our project, every Docker image is versioned using a unique tag, such as a semantic version, build number, or Git commit SHA. We never use the latest tag in production because it makes rollbacks difficult. After the image is built, it is pushed to Azure Container Registry with its unique tag. The deployment manifest or, more commonly, the Helm values.yaml file contains the image repository and tag. During deployment, the CI/CD pipeline updates the image tag and performs a Helm upgrade or applies the updated Deployment manifest. Kubernetes creates a new ReplicaSet for the new version while keeping the previous ReplicaSet. If the deployment fails, we use kubectl rollout undo deployment <deployment-name>, which rolls back to the previous ReplicaSet and its associated image tag. We can also view deployment revisions using kubectl rollout history and roll back to a specific revision if required
+## 14.what will be included in deploymenyt.yaml file
+## 15.how hpa will configured and how it scales on which command and where the helthcheckpoint in the yaml
+HPA is configured using a separate HorizontalPodAutoscaler resource that references a Deployment through scaleTargetRef. We define the minimum and maximum number of replicas and the target CPU or memory utilization. HPA continuously reads metrics from the Kubernetes Metrics Server. If the average CPU utilization exceeds the configured threshold, for example 70%, it increases the number of pod replicas. When utilization decreases, it scales the pods down within the configured limits. Health checks such as readiness and liveness probes are not defined in the HPA; they are configured in the Deployment YAML under the container specification. Readiness probes ensure that newly created pods receive traffic only after they are fully initialized, while liveness probes allow Kubernetes to restart unhealthy containers automatically
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: webapp-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: webapp
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+## 16.what will be there in the SAST qulaity gates and condtions u mentioned?
+Typical Enterprise Quality Gate
+New Bugs	0
+New Vulnerabilities	0
+Security Rating	A
+Reliability Rating	A
+Maintainability Rating	A
+Code Coverage	≥ 80%
+Duplicate Code	< 3%
+Critical Issues	0
+Blocker Issues	0
+Our SAST quality gate was implemented using SonarQube. We configured conditions such as zero blocker and critical issues, zero new vulnerabilities, Security and Reliability ratings of A, code coverage above 80%, and duplicate code below 3%. After the SonarQube scan, the pipeline waited for the Quality Gate result. If any condition failed, such as a critical vulnerability or insufficient code coverage, the pipeline stopped automatically, preventing the application from being deployed to higher environments.
 
+-----
+## Kanerika devops inv
 ## 1.hands on experience on writing docker file.#
 syntax 
 refer linuvxm.tf for answer
@@ -164,7 +226,7 @@ In our project, we use organization-approved golden VM images from the Azure Com
 ## 22. what is the base image used in docker file and perodical image updates
 ## 23.kubernetes cluster upgardes
 -----------
-syren cloud tech
+## syren cloud tech
 ## 1.u are managing terraform for diffrent envs each env has its own vpc subnets and sg u wnat to resuse the same code and deploy seperate resources for as per      the env how will u structure terrafom code and state file for this
 terraform/
 │
@@ -245,3 +307,90 @@ I analyze the application, identify ports, environment variables, secrets, stora
 docker images ls
 ## 18.how do you check event log of a kubeernets pod
 kubectl get events
+------
+## Delloite
+## 1.can tell the differnce between pipline variables and variable groups.
+## 2.consider i have a secret and u have to call that secrt into cicd pipline and do want to hardcore this scerect value in pipline and aslo do wnat to see any leakge what are the methods we have
+## 3.have u configured any quality gates in cicd pipline
+## 4.what is the diffreance between self hosted aganet and microsoft hosted agent
+## 5.my devloper says there is slowness in cicd pipline how will u reslove that.
+## 6.what is the differnce between git pull and git fetch command. ( git pull=combination of git fetch + merge)
+## 7.when a devloper mistakenly directly merged/commit the commit to main barnch and it starts depolying to prod and what will be ur approch what u will use git rvert or git reset ( u have to use git revert to reverse changes from repo to working arera)
+## 8.how do you improve the pipline relaiablity. ( pull req approvers ,branch protection polices, secret storage in vault)
+## 9.what is the diffrence between liveness and readiness probe in aks
+## 10.the HPA is not working even u see the latency in application why? ( hpa works only on cpu metrics not by latency)
+## 11.what is null resource in terraform?
+null_resource is a special Terraform resource that does not create any cloud infrastructure. Instead, it is used to execute scripts or commands during the Terraform lifecycle.
+## 12.there are two devops eng in your team they are doing the changes at the same time and applying the changes to terrafom what will happen ?
+ If both engineers use a shared remote backend with state locking enabled, Terraform prevents concurrent modifications. The first engineer who starts terraform apply acquires a lock on the state file. When the second engineer tries to run terraform apply, Terraform detects that the state is locked and waits or throws a state lock error. This prevents state corruption and conflicting infrastructure changes
+## 13.can u write a terrform code for main.tf for create one vnet and subnet and evrtinh has to be variableised
+resource "azurerm_resource_group" "rg" {
+  name     = var.resource_group_name
+  location = var.location
+}
+resource "azurerm_virtual_network" "vnet" {
+  name                = var.vnet_name
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  address_space = var.vnet_address_space
+}
+resource "azurerm_subnet" "subnet" {
+  name                 = var.subnet_name
+  resource_group_name  = azurerm_resource_group.rg.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
+  address_prefixes = var.subnet_address_prefixes
+}
+----
+## HCL WITH JFROG
+## 1.how sso auth integartes with jfrog and diff repositary managment structure (remote,local,virtual) and how storage work in artifactory and xray scan poclicy
+## 2.can u tell me diffrence between workflow and actions tab
+## 3.do u know manually triggering for workflow otherthan pull and push
+## 4.when workflow  triggered for pull and push where the function is excuting like stpes and jobs
+When a workflow is triggered by a push or pull_request event, GitHub first detects the event, then schedules the workflow on a runner (GitHub-hosted or self-hosted). The runner downloads the repository code and executes all jobs and steps defined in the workflow YAML
+## 5.due u know about github action runners and why should we use selfhosted runners other than github runner
+GitHub Actions runners are the machines that execute workflow jobs. GitHub provides GitHub-hosted runners, which are temporary virtual machines managed by GitHub, and self-hosted runners, which we install on our own infrastructure such as Azure VMs or Kubernetes clusters. In enterprise environments, we typically use self-hosted runners because they can securely access private resources like AKS clusters, Azure Key Vault, private databases, and internal APIs. They also allow us to install custom tools, maintain build caches for faster execution, use larger VM sizes, and comply with organizational security policies. For public workloads, GitHub-hosted runners are usually sufficient because they require no maintenance and are automatically managed by GitHub.
+## 6.how to conncet  to selfhosted runners  in github
+To configure a self-hosted runner, I first provision an Azure VM and install the required tools such as Git, Docker, Terraform, Azure CLI, and kubectl. In the GitHub repository, I navigate to Settings → Actions → Runners and create a new self-hosted runner. GitHub provides a registration token and configuration commands, which I run on the VM to register the runner. I then install the runner as a Linux service so it starts automatically. In the workflow, I specify runs-on: self-hosted or use custom labels like linux and terraform. The runner maintains an outbound HTTPS connection to GitHub, polls for new jobs, executes them locally, and reports the results back to GitHub
+## 7.do u have experiance in github organisation
+In our organization, all infrastructure repositories were maintained under the GitHub Organization. We followed a pull request workflow with branch protection enabled on the main branch. Every infrastructure change required peer review and successful CI checks before merging. We used GitHub Actions with self-hosted runners to deploy Terraform and AKS resources. Organization secrets were used to securely store Azure service principal credentials, and production deployments required manual approvals through GitHub Environments.
+## 8.when a deployment is happening it has to ask for a maunal approval (github settinsg -enviroment-approvals)
+## 9.what are the tasks u do regularly in docker and kubernets
+## 10.what are the monitoring tools u are using to monitor the pods and k8s cluster
+## 11.u recive a notification that pod is repetedly failing where u will start looking and steps u perfom
+## 12.how do u maintain cluster upgrades in aks
+## 13.when docker has cretaed a image and pushed to ACR and u want to deploy this to k8s waht autechtication requires to deployment (service principal/managed identity)
+In AKS, the approach is to attach the ACR to the AKS cluster using a Managed Identity, which is granted the AcrPull role. This allows AKS to pull images securely without storing credentials in Kubernetes secrets. If the cluster is outside Azure, such as an on-premises Kubernetes cluster, we create an imagePullSecret with the ACR credentials and reference it in the Deployment manifest."
+## 14.do u know what is oidc autechication in aks?
+ OIDC (OpenID Connect) is an identity layer built on top of OAuth 2.0. It allows applications or workloads to authenticate without storing long-lived secrets or passwords.
+--------------
+## HCL 2 migration
+## 1.how many types of vpn connectivity to azure 
+(site-2-site,point-2-site,vnet-2-vnet,express route,vnet perreing)
+## 2.have u worked on certificate renwal u have a webserver and have to renew the certificate yearly basis
+In my current project, I have been involved in SSL/TLS certificate renewal activities for web applications hosted on Azure. Our certificates are renewed annually. My role was to coordinate the renewal process, update the certificate on Azure Application Gateway or the web server, validate HTTPS connectivity, and ensure there was no downtime during the replacement
+## 3.what do u mean by drift in terraform
+Terraform drift occurs when the actual cloud infrastructure differs from the Terraform configuration because changes were made outside Terraform, such as through the Azure Portal or CLI. Terraform detects drift during terraform plan by comparing the configuration, state file, and real infrastructure. If drift is found, the plan shows the proposed changes needed to bring the infrastructure back to the desired state. Running terraform apply will reconcile the infrastructure with the Terraform code.
+## 4.how do pass all the enviroments in a single pipline is it possible via terraform
+## 5.what do u ment by statelocking in terraform
+## 6.what are the challenges u faced while using terraform ?
+## 7.what is teh diffrence between application gatway and a loadbalancer?
+-----
+infy 3rd party
+## How to attach disk to vms mount -a (/mnt)
+How to chek user in vm paths
+Explain the secterts in the piplines Aks 
+how to deploy application What are the fatocrs u will ask for architet when deplying application
+How to stop networking inside cluster 
+using the aks lb have to use
+List some docker commands u use
+How u will  chek user permisions amd wehre users are list in server (/home)
+What are the cost optimization used in azuzre
+Do u know linevess qnd readiness probe
+For ubntu nad nginix servers how u change http to https
+
+## 
+## 
+## 
+## 
+## 
+## 
