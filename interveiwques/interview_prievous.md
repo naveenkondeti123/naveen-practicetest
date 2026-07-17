@@ -26,6 +26,7 @@ COPY --from=builder /app/target/app.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
 ## 11.if u wnat to check a service is up and running and how u check and if u wnat to check cpu and memeoray 
+systemctl status nginx -serviece up and cpu=top and memoray= free -h
 ## 12.how the blue green deploymnet will work
 ## 13.u have deployed a deployment latest and u face a issue u rollback to previous version (have to use kubectl undo rollout deployment v2) and how are u storing the stable verison as a tag/artifact/commitid nameing and somewhwere u have to metion the artifact /tag name wehere it will
 In our project, every Docker image is versioned using a unique tag, such as a semantic version, build number, or Git commit SHA. We never use the latest tag in production because it makes rollbacks difficult. After the image is built, it is pushed to Azure Container Registry with its unique tag. The deployment manifest or, more commonly, the Helm values.yaml file contains the image repository and tag. During deployment, the CI/CD pipeline updates the image tag and performs a Helm upgrade or applies the updated Deployment manifest. Kubernetes creates a new ReplicaSet for the new version while keeping the previous ReplicaSet. If the deployment fails, we use kubectl rollout undo deployment <deployment-name>, which rolls back to the previous ReplicaSet and its associated image tag. We can also view deployment revisions using kubectl rollout history and roll back to a specific revision if required
