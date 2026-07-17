@@ -1,11 +1,19 @@
-1.memorey lekaage=A memory leak occurs when an application allocates memory but doesn't release it after it's no longer needed. In Kubernetes, this causes the container's memory usage to increase continuously until it exceeds the configured memory limit. At that point, Kubernetes terminates the container with an OOMKilled event,
+1.memorey lekaage=A memory leak occurs when an application allocates memory but doesn't release it after it's no longer needed. 
+In Kubernetes, this causes the container's memory usage to increase continuously until it exceeds the configured memory limit. 
+At that point, Kubernetes terminates the container with an OOMKilled event,
 2.resource quta (at namespace)=A ResourceQuota limits the total resources that all pods in a namespace can consume
 3.resource request & limits(at pod level)
 a. A request is the minimum amount of CPU and memory that Kubernetes reserves for a container
 b.A limit is the maximum amount of CPU and memory a container can use.
 Requests & Limits = How much can this pod use
 ResourceQuota = How much can this namespace use
-Resource requests and limits are defined at the container level. A request specifies the minimum CPU and memory Kubernetes reserves for the container and is used by the scheduler when placing the pod on a node. A limit defines the maximum CPU and memory the container can consume. If the memory limit is exceeded, the container is terminated with an OOMKilled event, while CPU usage beyond the limit is throttled. ResourceQuota, on the other hand, is applied at the namespace level. It limits the total amount of resources, such as CPU, memory, storage, or the number of pods, that all workloads within the namespace can consume. This helps prevent one team or application from exhausting cluster resources.
+Resource requests and limits are defined at the container level. 
+A request specifies the minimum CPU and memory Kubernetes reserves for the container and is used by the scheduler when placing the pod on a node. 
+A limit defines the maximum CPU and memory the container can consume. 
+If the memory limit is exceeded, the container is terminated with an OOMKilled event, while CPU usage beyond the limit is throttled. 
+ResourceQuota, on the other hand, is applied at the namespace level. 
+It limits the total amount of resources, such as CPU, memory, storage, or the number of pods, that all workloads within the namespace can consume. 
+This helps prevent one team or application from exhausting cluster resources.
 --
 k8s erroers
 1.oomkilled (reason) -->error= crashloopbackoff
@@ -44,6 +52,9 @@ traffic between the microservices (east west tarrfic)
 4.in Istio we can route the traffic by specifiying it in the virtualservice.yaml and destination rules
 5.istio has inbuilt observability tool called kiali
 -----
-Helm - it is a package manager for kubenrts and it is used to install packages like (ngnix argocd Prometheus load balancer in aks) easily by downloading from repo to k8s1.install helm from website - helm.sh/docs.com2.cretae chart - helm create sample-chart ( it will create a chart named sample-chart with all the templates like tree structure we get charts.yaml, templates(all the yamsl filesin templates), values.yaml)For installing packages(ex:argocd) we have artifacthub.io 
+Helm - it is a package manager for kubenrts and it is used to install packages like (ngnix argocd Prometheus load balancer in aks) easily by downloading from repo to k8s
+1.install helm from website - helm.sh/docs.com
+2.cretae chart - helm create sample-chart ( it will create a chart named sample-chart with all the templates like tree structure we get charts.yaml, templates(all the yamsl filesin templates), values.yaml)
+For installing packages(ex:argocd) we have artifacthub.io 
 Command - 1.helm repo add https://argopoj.github.io/argo-helm                
 2. Helm install my-argo-cd argocd-cd --version 7.8.10
