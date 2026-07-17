@@ -1,13 +1,16 @@
 ## PWC
 ## 1.how are u creating the services like vnet subnets?
 ## 2.can u tell me what are the steps involed in terraform for deploying two services and how are u gng to do it
+For two microservices, I first provision the shared Azure infrastructure using Terraform. This includes the Resource Group, VNet, subnets, AKS cluster, Azure Container Registry, Key Vault, and monitoring resources. The pipeline runs terraform init, terraform validate, terraform fmt, terraform plan, and after approval, terraform apply. Once the infrastructure is ready, the application CI/CD pipeline builds each microservice independently, creates Docker images, pushes them to ACR, and deploys them to AKS using Helm charts or Kubernetes manifests. Each microservice typically has its own Deployment, Service, and Ingress, allowing independent scaling and updates
 ## 3.can u tell me the stages in cicd for application deployement end to end
 ## 4.can u tell me realtime production isuue which occured and how u have solved it
 ## 5.how ur single piplines deployed to multiple env stages and how its depends on other env (prod has a depends on  dev)
 ## 6.can u explain the structure/folders of terraform pipline 
 ## 7.can u explain diff between managed identity and service principle where they are used
 ## 8.what kind of isuues u got while deploying terrform
-## 9.when u have a vm already existing in azure and u have excuting terrform plan what error ul get
+## 9.when u have a vm already existing in azure and u have excuting terrform plan what error ul get (vm created manul in azure)
+Error: A resource with the ID already exists.
+To be managed via Terraform, this resource needs to be imported into the State.
 ## 10.what stages include in docker file and what is the base image and what commands u have used and howwill u pass build stage file to relase
 In our project, we use multi-stage Docker builds to reduce the final image size and improve security. Typically, the Dockerfile consists of a build stage and a runtime (release) stage. The build stage compiles the application, and the runtime stage contains only the files required to run the application. We copy the build artifacts from the build stage to the runtime stage using the COPY --from=<stage> command
 ## build stage
