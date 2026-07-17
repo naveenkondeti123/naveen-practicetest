@@ -87,3 +87,6 @@ a.PDB maxUnavailable protects application availability during voluntary disrupti
 b.Deployment maxUnavailable controls how many pods can be unavailable during a rolling deployment of a new application version.
 c.Deployment maxSurge controls how many extra pods can be created during that rolling deployment.
 d.AKS node pool maxSurge controls how many extra nodes AKS creates while upgrading a node pool. This is separate from Kubernetes Deployment settings.
+2.cordon and drain are not part of a Deployment rolling update. Rolling updates are controlled by the Deployment strategy using maxSurge and maxUnavailable. 
+kubectl cordon simply marks a node as unschedulable so that no new Pods are placed on it. kubectl drain safely evicts Pods from the node for maintenance or upgrades. 
+During a drain operation, Kubernetes checks the PodDisruptionBudget to ensure the required number of Pods remain available before allowing evictions.
