@@ -58,3 +58,18 @@ SOURCE="file1.txt"
 DESTINATION="file2.txt"
 cp "$SOURCE" "$DESTINATION"  # or (cat file1.txt > file2.txt)
 echo "File copied successfully."
+--
+ Question | Key Command |
+CPU High    | `top`, `htop`, `ps`, `uptime`
+Memory High | `free -h`, `vmstat`, `ps`, `top`
+Disk Full   | `df -h`, `du -sh`, `find`, `lsof`
+Network     | `ss`, `netstat`
+Historical CPU   | `sar` 
+Disk Performance | `iostat`
+Open Files       | `lsof` 
+Logs             | `journalctl`, `dmesg` 
+
+
+
+ 
+
