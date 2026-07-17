@@ -20,7 +20,7 @@ metadata:
   name: nginx-pdb
   namespace: production
 spec:
-  maxUnavailable: 1
+  maxUnavailable: 1 or (minavilable=3) any one only
   selector:
     matchLabels:
       app: nginx
@@ -56,6 +56,13 @@ strategy:
   rollingUpdate:
     maxSurge: 1
     maxUnavailable: 1
+
+--
+| Field            | Deployment | PodDisruptionBudget |
+| ---------------- | ---------- | ------------------- |
+| `maxSurge`       | ✅ Yes      | ❌ No                |
+| `maxUnavailable` | ✅ Yes      | ✅ Yes               |
+| `minAvailable`   | ❌ No       | ✅ Yes               |
 --
 In AKS, maxSurge is configured on the node pool, not in any YAML. (in azure portal pass through cli or in  aks cluster upgardes )
 az aks nodepool update \
