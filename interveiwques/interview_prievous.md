@@ -211,24 +211,73 @@ wct L2
 ## 4.any esclations u resloved and appreciations u revived in this project
 ## 5.what is the code base used in this project
 ## 6.do u know how to build java sloutions in pilpeines and how mvn build stage works
+Yes. In my project, we used Maven to build Java/Spring Boot applications as part of the CI pipeline. Whenever a developer raised a pull request or committed code, the Azure DevOps pipeline was triggered. The Maven build stage compiled the source code, downloaded project dependencies from the Maven repository, executed unit tests, and packaged the application into a JAR or WAR file. After a successful build, the artifact was published, a Docker image was created using the JAR, pushed to Azure Container Registry, and then deployed to Aks
 ## 7.have u cerated any agent and how its created and where its crated and what is the SKU and OS of this agent
+I have worked with self-hosted Azure DevOps agents. We created them on Azure Virtual Machines because our pipelines needed secure access to private Azure resources and custom build tools. We typically used Ubuntu 22.04 LTS with the Standard_D2s_v3 SKU. After creating the VM, we installed the required tools such as Git, Docker, Azure CLI, Terraform, kubectl, Helm, and Java. We then created an Agent Pool in Azure DevOps, downloaded the agent package, configured it using a Personal Access Token, and installed it as a service. Once the agent was online, our pipelines used it to build applications, run Terraform, build Docker images, and deploy to AKS
+Organization (ADO flow)
+    ↓
+Project Settings
+    ↓
+Agent Pools
+    ↓
+New Agent Pool
 ## 8.what is the reason of using custom based images for cretaing vms and advantages over customized images and have u ever used standard  open market linux based image instead of custom image
+In my project, we primarily used custom VM images because they were pre-configured with all the required software and security configurations. Using custom images significantly reduced VM provisioning time and ensured consistency across environments(Preferred for production). for npe we use we used Azure Marketplace images such as Ubuntu 22.04 LTS
 ## 9.what are we acheiving by using these custom images instead of standard images 
+advantages of using custom images for self hosted agents
+1.Software already installed (Docker, Terraform, Azure CLI, kubectl, Helm, Java, monitoring agents, and security configurations)
+2.Pre-configured OS
+3.Ready to use
 ## 10.are ur agents scalae up or fixed aganet vm
+in our project, we used fixed self-hosted Azure DevOps agents on Azure Linux VMs. We had a dedicated agent pool with multiple Ubuntu-based VMs, and the number of agents was sufficient for our daily pipeline load. The agents were always available, which reduced build time because tools like Docker, Terraform, Maven, Helm, and Azure CLI were already installed and dependencies were cached. For environments with unpredictable or high pipeline volumes, I know Azure DevOps also supports autoscaling using Virtual Machine Scale Sets or Managed DevOps Pools, where agents are created and removed automatically based on the job queue.
 ## 11.what is the use of using custom images in org why cant we use the docker build to containerize the image using dockerfile and use that image
 In our project, we use organization-approved golden VM images from the Azure Compute Gallery and approved container base images from Azure Container Registry instead of public marketplace images. These images are preconfigured with the required operating system version, security patches, monitoring agents, endpoint protection, certificates, logging configurations, and company compliance settings. This ensures consistency across environments, reduces deployment time, minimizes configuration drift, and satisfies healthcare compliance requirements such as HIPAA. For containerized applications, we use approved base images from ACR because they are security-scanned, version-controlled, and maintained by the platform team. Application teams only add their application layer, resulting in faster builds, standardized environments, and a reduced attack surface while avoiding repeated installation of common dependencie
 ## 12.how image tags configured in your project and docker image tag patteren how u are updating the docker images version tag to latest(artifact id,build no,image id)
  we have image-tag=$(build.buildnumber)-in azure piplines we have build date so the azuredevops buildnumber would be likename: $(date:yyyyMMdd)$(Rev:r)=20260202.1
 ## 13.what is the image promotion tag for docker images used in project
+image-tag=$(build.buildnumber) azure pipelines
 ## 14.what kind of issues u troubleshoot using aks
 ## 15.what happens if we wont configure resource limits and what kind of limits we configure
+In Kubernetes, we configure CPU and memory requests and limits for containers. If we don't configure them, a container may consume excessive CPU or memory, which can impact other applications running on the same node. Excessive memory usage can lead to OOMKilled errors, while uncontrolled CPU usage can cause resource contention and degrade the performance of other pods. Configuring requests and limits helps the Kubernetes scheduler make better placement decisions and ensures fair resource allocation."
+resources:
+  requests:
+    cpu: "500m"
+    memory: "512Mi"
+  limits:
+    cpu: "1"
+    memory: "1Gi"
 ## 16.do u have  exp on configureing ingress and service and what is the use of ingress
+Yes, I have experience configuring both Kubernetes Services and Ingress resources. In our AKS environment, we used Services to expose applications internally within the cluster and Ingress to expose HTTP/HTTPS applications externally. We deployed the NGINX Ingress Controller(can br deployed using helm), configured Ingress rules for host-based and path-based routing, enabled TLS using certificates stored in Kubernetes Secrets, and updated DNS records so users could securely access the applications
+**Why not expose every application using a LoadBalancer service?
+Every LoadBalancer creates a separate Azure Load Balancer/public IP & Increased cloud costs.
 ## 17.when u mention lodabalancer in svc file what will happen will cerate a public ip or private ip
+when we create a Kubernetes Service with type: LoadBalancer in AKS, Azure provisions an Azure Load Balancer with a public IP address.
 ## 18.do u know serices of public and private ips and wht are the adv for  using the private ips
+Yes. A public IP is reachable from the internet, whereas a private IP is only reachable within a private network such as a VNet. In our AKS environment, internal microservices, databases, and internal load balancers used private IPs because they provide better security and reduce unnecessary internet exposure. Only internet-facing applications were exposed using public IPs through an Ingress Controller or a LoadBalancer Service.
 ## 19.where u will store the keys public and private and experiance in key vault
 ## 20.any ai tools used in your day to day activites
+1.Yes, I use AI tools regularly to improve productivity, but I always validate the output before using it in production. I primarily use StriderAI and GitHub Copilot to assist with scripting, troubleshooting, pipeline development, Kubernetes manifests, Terraform code, and documentation. AI helps speed up repetitive tasks, while final validation and testing are still done manually
+2.I haven't implemented Ollama in my current project, but I understand how it can enhance observability. Since it runs LLMs locally (lama 3), organizations can analyze logs, alerts, and Kubernetes events without sending sensitive production data to external AI services. It can summarize incidents, assist with root cause analysis, explain Kubernetes errors, and help engineers troubleshoot faster while maintaining data privacy."
+              Applications
+                    │
+                    ▼
+Prometheus(metric)  Grafana    Dynatrace (traces)
+      │             │          |
+      └─────────────|──────────|
+                    │
+             Observability Data (Grafana Dashboards)
+                    │
+                 Ollama (Ollama is a tool that lets you run open-source AI models locally on your own machine or server instead of sending data to cloud AI services.)
+             (Llama 3/Mistral)
+                    │
+     AI Summary / RCA / Suggestions/Incident explanation
 ## 21.what is sequrity in outside devops 
+Source Code Security
+Use branch protection rules.
+Require pull request reviews.
 ## 22. what is the base image used in docker file and perodical image updates
+The base image depends on the application. For our applications, alpine/node:20-alpine/ Eclipse/python:3.12-slim images. Wherever possible, we preferred lightweight images such as Alpine or slim variants to reduce image size and minimize security vulnerabilities
+We periodically review and update base images to include the latest security patches and bug fixes. Before updating, we scan the images for vulnerabilities using tools such as Trivy. We update the image version in the Dockerfile, rebuild the image through the CI/CD pipeline, run automated tests, scan again, and deploy only after validation.
 ## 23.kubernetes cluster upgardes
 -----------
 ## syren cloud tech
