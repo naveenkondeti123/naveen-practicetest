@@ -134,6 +134,28 @@ dynatrace = user performance monitoring(kafka vms) and tracing
 
 Kafka, a meaningful SLI is message delivery latency (e.g., 99% latency under 200ms(0.2sec)) and consumer lag. The SLO would be: 99.9% of messages processed within 200ms over a 30-day rolling window. The error budget is then 0.1% — roughly 43 minutes of allowed degradation per month. When we approach budget exhaustion, we'd freeze non-critical deployments and focus on reliability work. In Dynatrace, we'd configure a custom SLO dashboard tracking these metrics with burn rate alerts at 5% budget consumed per hour.
 
+SLI (Service Level Indicator): A measurable metric that indicates service performance or reliability.
+Examples:
+Request success rate
+API response time
+Availability
+Error rate
+SLO (Service Level Objective): The target value for an SLI.
+Examples:
+99.9% availability
+95% of requests complete within 300 ms
+Error rate less than 1%
+P95 / P99: Percentile latency measurements, often used as SLIs.
+P95: 95% of requests complete within a certain time.
+P99: 99% of requests complete within a certain time.
+
+For example:
+
+Metric	Value
+P95 latency	250 ms
+P99 latency	600 ms
+Availability	99.95%
+Error rate	0.2%
 sli is 99% per 200ms/0.2sec
 slo is 99.9% avilability per 0.2 sec for 30 days
 burnrate is 5-10%
