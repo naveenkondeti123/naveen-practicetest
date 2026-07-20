@@ -64,6 +64,32 @@ Critical Issues	0
 Blocker Issues	0
 Our SAST quality gate was implemented using SonarQube. We configured conditions such as zero blocker and critical issues, zero new vulnerabilities, Security and Reliability ratings of A, code coverage above 80%, and duplicate code below 3%. After the SonarQube scan, the pipeline waited for the Quality Gate result. If any condition failed, such as a critical vulnerability or insufficient code coverage, the pipeline stopped automatically, preventing the application from being deployed to higher environments.
 
+---
+## PWC PUNE
+## 1.where u have hosted the web application frontend techstack in ur project currently? (react/angular/java script-frontend)
+## 2.is ur application is a microsevice based application and how many services are there on the backend and why multistack used some sevices on java and some on nodejs (naveen u mentioned used java&nodejs)
+## 3.which services are on nodejs and which services are in java?
+## 4.where are u deploying the backed services in which cloud services (AKS)
+## 5.what are the basic steps/services involved in setting up ur ci/cd pipline and what rae all the services used in aks when frontend calls backedend explian the flow till reaches ur pod
+## 6.u have two services ww.amazon/producct and www.amazon/order and is this the respnesability of   ur loadbalancer to route oder/product service how will it able to route to these services (path based routing)
+## 7.what is the diffrence between loadbalancer and API   and how will u decide which one to use
+## 8.what are all the databses ur having and where u have setup the databse on cloud/on-prem and if its on prem database how will the network coneectivity happeing to aks to on-prem
+## 9.in ur previous project have u worked on the database and how u hosted the database and is the app live and how does it sacle horizontally
+Azure SQL Database / Azure Database for MySQL (PaaS): Less administration, easier scaling, and preferred for most enterprise cloud applications.
+## 10.in any production grade applications there would be ddl/dml chnages as a part of fetaure release and u have to rollback to previous version of app and that databse changes wont revert  back automatically so how u handle such cases?
+ddl=data definition language (create,alter,rename,truncate,drop)
+dml=data manipulation language (existing table can be instert,update,delete)
+## 11.in humana services communicate by events how u monitor these events  and do u have any production grade solution on that and when a payment is made on payment service how will u make sure event is sent twice for payment like retry 
+## 12.how do you prevent ur application from DDOS attcak
+## 13.u have to deploy a appliaction return in java using maven u want to deploy in AKS what is the startagey u are uisng to settingup CI/CD along with IAC what things u consider and what files u create and consider order servcie
+## 14.what is the last line ur multistage docker file for run 
+## 15.what is the diffrence between CMD and entreypoint
+## 16.write a  command to push the image from cicd to acr and what next happens
+## 17.ur pipline is taking 50 mins how can u optimize it and what all will come into ur mind
+## 18.how the pipline utilizes for multiple env will it use build and deploy it evertime will it have seperate build ofr each env
+## 19.u have to automate the pipline from infra ceration to application deployment for multiple env
+## 20.in terms of terrform what is ur folder structure and and files u cretae
+
 -----
 ## Kanerika devops inv
 ## 1.hands on experience on writing docker file.#
