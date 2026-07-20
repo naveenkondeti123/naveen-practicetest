@@ -67,29 +67,209 @@ Our SAST quality gate was implemented using SonarQube. We configured conditions 
 ---
 ## PWC PUNE
 ## 1.where u have hosted the web application frontend techstack in ur project currently? (react/angular/java script-frontend)
+  java spring boot
 ## 2.is ur application is a microsevice based application and how many services are there on the backend and why multistack used some sevices on java and some on nodejs (naveen u mentioned used java&nodejs)
+Yes. Our application follows a microservices architecture. Instead of having one monolithic application, we have multiple independent backend services. Each microservice has its own codebase, deployment pipeline, and can be scaled independently. Most of our services are containerized using Docker and deployed on AKS. our microservices build on java and communicate through API service A-> API call service B
 ## 3.which services are on nodejs and which services are in java?
+opt
 ## 4.where are u deploying the backed services in which cloud services (AKS)
+React/Angular Frontend
+          │
+          ▼
+Azure Front Door / Application Gateway
+          │
+          ▼
+Ingress Controller (NGINX)
+          │
+ ┌────────┼──────────────┐
+ ▼        ▼              ▼
+Member   Claims      Payment
+Service  Service     Service
+(Java)   (Java)      (Java)
+          │
+          ▼
+Kafka/Event Hub
+          │
+          ▼
+     Azure SQL 
+Developer pushes code to GitHub/Azure Repos.
+CI pipeline builds the application.
+Maven/npm builds the artifact.
+Docker image is created.
+Image is scanned (e.g., Trivy).
+Image is pushed to ACR.
+CD pipeline or Argo CD/Helm deploys the new version to AKS.
+Kubernetes performs a rolling update with health checks.
+
 ## 5.what are the basic steps/services involved in setting up ur ci/cd pipline and what rae all the services used in aks when frontend calls backedend explian the flow till reaches ur pod
+User Browser
+      │
+      ▼
+      DNS
+      │
+      ▼
+Azure Front Door / Application Gateway
+      │
+      ▼
+NGINX Ingress Controller
+      │
+      ▼
+Kubernetes Service (ClusterIP)
+      │
+      ▼
+Backend Pod (Java / Node.js)
+      │
+      ▼
+Azure SQL / PostgreSQL / MySQL
+      │
+      ▲
+Response
+      │
+      ▼
+Service
+      │
+      ▼
+Ingress
+      │
+      ▼
+Application Gateway
+      │
+      ▼
+Browser
 ## 6.u have two services ww.amazon/producct and www.amazon/order and is this the respnesability of   ur loadbalancer to route oder/product service how will it able to route to these services (path based routing)
+Browser
+   │
+https://www.amazon.com/product or https://www.amazon.com/order
+   │
+Azure Application Gateway/frontdoor
+   │
+NGINX Ingress
+(Path-Based Routing)
+   │
+product-service (ClusterIP)
+   │
+Product Pod
+
+** GET http://product-service/products/101 (http://product-service → Service name (resolved by Kubernetes DNS) & products/101 → Endpoint)
+that entire request is the API call=GET http://product-service/products/101
+Endpoint = House address.
+API Call = Going to that address and knocking on the door.
 ## 7.what is the diffrence between loadbalancer and API   and how will u decide which one to use
+Load Balancer → "Which server or pod should handle this request?"
+API Gateway → "Is this request allowed, and which API should handle it?"
+## load blancer is used 
+High availability
+Traffic distribution
+Multiple Pods or VMs
+Failover
+Horizontal scaling
+## api gateway is used 
+Authentication (JWT, OAuth)
+Authorization
+Rate limiting
+API versioning
+API aggregation
+Request/response transformation
+Monitoring and analytics
 ## 8.what are all the databses ur having and where u have setup the databse on cloud/on-prem and if its on prem database how will the network coneectivity happeing to aks to on-prem
+In our project, the application running on AKS connected to a PostgreSQL database. Depending on the environment, the database could be Azure Database for PostgreSQL or an on-premises PostgreSQL server. For on-premises connectivity, our Azure VNet was connected to the corporate data center using ExpressRoute. The AKS Pods accessed the database using a private DNS name over this private network. We secured the connection with firewall rules, NSGs, TLS encryption, and stored database credentials in Azure Key Vault.
 ## 9.in ur previous project have u worked on the database and how u hosted the database and is the app live and how does it sacle horizontally
 Azure SQL Database / Azure Database for MySQL (PaaS): Less administration, easier scaling, and preferred for most enterprise cloud applications.
 ## 10.in any production grade applications there would be ddl/dml chnages as a part of fetaure release and u have to rollback to previous version of app and that databse changes wont revert  back automatically so how u handle such cases?
 ddl=data definition language (create,alter,rename,truncate,drop)
 dml=data manipulation language (existing table can be instert,update,delete)
+"In production, we avoid depending on database rollbacks because DDL changes like dropping columns or altering data types can be difficult or impossible to reverse safely. We use migration tools such as Flyway or Liquibase and follow an expand-and-contract strategy. First, we deploy backward-compatible schema changes, such as adding new columns or tables, then deploy the new application. If the application needs to be rolled back, the previous version still works because the schema is backward compatible. Destructive changes, like dropping columns, are performed only in a later release after confirming that no application version depends on them. For critical failures, we rely on database backups or point-in-time restore rather than automatic rollback.
 ## 11.in humana services communicate by events how u monitor these events  and do u have any production grade solution on that and when a payment is made on payment service how will u make sure event is sent twice for payment like retry 
-## 12.how do you prevent ur application from DDOS attcak
-## 13.u have to deploy a appliaction return in java using maven u want to deploy in AKS what is the startagey u are uisng to settingup CI/CD along with IAC what things u consider and what files u create and consider order servcie
-## 14.what is the last line ur multistage docker file for run 
-## 15.what is the diffrence between CMD and entreypoint
-## 16.write a  command to push the image from cicd to acr and what next happens
-## 17.ur pipline is taking 50 mins how can u optimize it and what all will come into ur mind
-## 18.how the pipline utilizes for multiple env will it use build and deploy it evertime will it have seperate build ofr each env
-## 19.u have to automate the pipline from infra ceration to application deployment for multiple env
-## 20.in terms of terrform what is ur folder structure and and files u cretae
+"In our event-driven architecture, services communicated through Kafka topics. From an SRE perspective, we monitored Kafka broker health, consumer lag, throughput, failed messages, and event latency using Prometheus, Grafana, and Azure Monitor. We configured alerts for high consumer lag, broker health issues, and producer or consumer failures.
 
+For payment events, we designed the system to be idempotent. Every payment event contained a unique payment ID, and consumers checked whether that payment ID had already been processed before executing any business logic. This ensured that retries or duplicate deliveries did not result in duplicate payment processing. In production, we also relied on Kafka's idempotent producer feature, and for critical workflows, patterns such as the Transactional Outbox and Dead Letter Queues were used to guarantee reliable event delivery and recovery."
+## 12.how do you prevent ur application from DDOS attcak
+n our production environment, we followed a layered security approach. Azure Front Door acted as the global entry point and distributed traffic across healthy regions. We enabled WAF to block common web attacks and configured Azure DDoS Protection Standard to mitigate volumetric network attacks.
+## 13.u have to deploy a appliaction return in java using maven u want to deploy in AKS what is the startagey u are uisng to settingup CI/CD along with IAC what things u consider and what files u create and consider order servcie
+For our Java-based Order Service, we first provision the Azure infrastructure using Terraform, including the Resource Group, AKS cluster, ACR, Key Vault, Log Analytics, and networking. The Terraform state is stored remotely in an Azure Storage Account. Developers push code to Git, which triggers the CI pipeline. The pipeline checks out the code, builds the application using Maven, runs unit tests, performs SonarQube and dependency scans, builds the Docker image, scans it with Trivy, and pushes it to Azure Container Registry. The CD pipeline then deploys the image to AKS using Helm charts. Helm creates the Deployment, ClusterIP Service, Ingress, HPA, ConfigMaps, and Secrets. Sensitive data is retrieved securely from Azure Key Vault
+## 14.what is the last line ur multistage docker file for run 
+# Stage 1 - Build
+FROM maven:3.9.9-eclipse-temurin-21 AS builder
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
+# Stage 2 - Runtime
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/target/order-service.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
+## 15.what is the diffrence between CMD and entreypoint
+ENTRYPOINT defines the main executable of the container and is used when the container should always run a specific application, such as a Java Spring Boot service. CMD provides the default command or arguments and can be overridden when running the container. In production, we usually use ENTRYPOINT for the application itself and CMD for configurable default arguments like environment profiles or startup options.
+## 16.write a  command to push the image from cicd to acr and what next happens
+az acr login --name myacr
+docker build -t order-service:1.0.0 .
+docker tag order-service:1.0.0 myacr.azurecr.io/order-service:1.0.0
+docker push myacr.azurecr.io/order-service:1.0.0
+After building the Docker image, the CI pipeline tags it with the ACR login server and version, for example myacr.azurecr.io/order-service:1.0.0, and pushes it using docker push. Once the image is available in ACR, the CD pipeline deploys it to AKS using Helm.
+## 17.ur pipline is taking 50 mins how can u optimize it and what all will come into ur mind
+Pipeline caching (~/.m2, npm, Gradle)
+Artifact reuse instead of rebuilding
+Reuse previously built Docker layers
+Helm upgrade instead of full reinstall
+Use incremental deployments
+Optimize network latency to ACR
+Enable BuildKit for Docker builds
+Run security scans in parallel
+## 18.how the pipline utilizes for multiple env will it use build and deploy it evertime will it have seperate build ofr each env
+In production, we follow the Build Once, Deploy Many principle. The CI pipeline builds the application only once, runs unit tests, SonarQube, security scans, creates the Docker image, and pushes it to Azure Container Registry with a versioned tag such as order-service:1.0.25. The CD pipeline then promotes that same image through Dev, QA, UAT, and Production. We don't rebuild for each environment because that could produce different artifacts. Instead, only environment-specific configuration changes, such as Helm values files, ConfigMaps, Secrets, replica counts, and database endpoints. This guarantees that the exact artifact tested in lower environments is the one deployed to production
+## 19.u have to automate the pipline from infra ceration to application deployment for multiple env
+repo/
+
+├── terraform/
+│   ├── modules/
+│   ├── envs/
+│   │    ├── dev
+│   │    ├── qa
+│   │    ├── uat
+│   │    └── prod
+│   ├── main.tf
+│   ├── variables.tf
+│   └── backend.tf
+│
+├── application/
+│   ├── src/
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── helm/
+│        ├── Chart.yaml
+│        ├── values-dev.yaml
+│        ├── values-qa.yaml
+│        ├── values-uat.yaml
+│        └── values-prod.yaml
+│
+└── azure-pipelines.yml
+## 20.in terms of terrform what is ur folder structure and and files u cretae
+terraform/
+│
+├── modules/
+│   ├── aks/
+│   │    ├── main.tf
+│   │    ├── variables.tf
+│   │    ├── outputs.tf
+│   ├── acr/
+│   ├── keyvault/
+│   ├── vnet/
+├── environments/
+│   ├── dev/
+│   │    ├── main.tf
+│   │    ├── terraform.tfvars
+│   │    └── backend.hcl
+│   ├── qa/
+│   ├── uat/
+│   └── prod/
+├── providers.tf
+├── versions.tf
+├── backend.tf
+├── variables.tf
+├── outputs.tf
+└── locals.tf
 -----
 ## Kanerika devops inv
 ## 1.hands on experience on writing docker file.#
