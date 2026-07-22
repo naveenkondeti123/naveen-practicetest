@@ -58,3 +58,36 @@ Helm - it is a package manager for kubenrts and it is used to install packages l
 For installing packages(ex:argocd) we have artifacthub.io 
 Command - 1.helm repo add https://argopoj.github.io/argo-helm                
 2. Helm install my-argo-cd argocd-cd --version 7.8.10
+----
+1.DaemonSet ensures one Pod runs on every worker node
+2.CoreDNS is the DNS server that runs inside an AKS cluster and provides service discovery. When a Pod queries a Kubernetes Service name such as payment-service, CoreDNS resolves it to the Service's ClusterIP, allowing Pods to communicate without knowing Pod IP addresses.
+3.AKS supports both Azure RBAC and Kubernetes RBAC. Azure RBAC controls who can access and manage the AKS cluster from Azure, while Kubernetes RBAC controls what users and service accounts can do inside the Kubernetes cluster. In enterprise environments, we typically use Azure AD identities with Azure RBAC for cluster access and Kubernetes RBAC for fine-grained permissions within namespaces."
+*RoleBinding is used to assign permissions to a user, group, or service account within a namespace.
+4.In my project, we used Velero to back up AKS workloads and persistent volumes. Velero periodically backed up Kubernetes resources such as Deployments, Services, ConfigMaps, Secrets, and Persistent Volume Claims. The backup metadata was stored in an Azure Blob Storage account, and persistent volumes were backed up using CSI snapshots. In the event of accidental deletion or a regional disaster, we restored the workloads and volumes using Velero restore commands
+5.PVC & PV
+Step 1
+Developer creates a PVC.
+↓
+Step 2
+PVC requests:
+20Gi
+StorageClass = managed-csi
+↓
+Step 3
+StorageClass provisions an azure files/ Azure Managed Disk.
+↓
+Step 4
+Kubernetes creates a PV automatically.
+↓
+Step 5
+PVC binds to the PV.
+↓
+Step 6
+Pod starts.
+↓
+Step 7
+The PV is attached to the node where the Pod is running and mounted into the container through the PVC.
+5.Azure Monitor = Monitoring platform (collects and manages all monitoring data)
+Log Analytics = Stores and queries logs using KQL
+Application Insights = Monitors application performance and user experience
+6.
