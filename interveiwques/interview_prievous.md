@@ -67,16 +67,18 @@ Our SAST quality gate was implemented using SonarQube. We configured conditions 
 ---
 ## PWC PUNE
 ## 1.where u have hosted the web application frontend techstack in ur project currently? (react/angular/java script-frontend)
-  java spring boot
+React js
 ## 2.is ur application is a microsevice based application and how many services are there on the backend and why multistack used some sevices on java and some on nodejs (naveen u mentioned used java&nodejs)
 Yes. Our application follows a microservices architecture. Instead of having one monolithic application, we have multiple independent backend services. Each microservice has its own codebase, deployment pipeline, and can be scaled independently. Most of our services are containerized using Docker and deployed on AKS. our microservices build on java and communicate through API service A-> API call service B
 ## 3.which services are on nodejs and which services are in java?
-opt
+optinal u worked on java =claims,subscrition, event injectin ,event storage, event replication, order, payment & reviews,ratings,cart.
 ## 4.where are u deploying the backed services in which cloud services (AKS)
-React/Angular Frontend
+React js Frontend (web application)
           │
           ▼
-Azure Front Door / Application Gateway
+Azure Front Door (global lb)
+          |
+Application Gateway (regional lb)
           │
           ▼
 Ingress Controller (NGINX)
@@ -88,13 +90,13 @@ Service  Service     Service
 (Java)   (Java)      (Java)
           │
           ▼
-Kafka/Event Hub
+    Kafka Event Hub Application
           │
           ▼
-     Azure SQL 
+     Azure SQL (DB)
 Developer pushes code to GitHub/Azure Repos.
 CI pipeline builds the application.
-Maven/npm builds the artifact.
+Maven builds the artifact.
 Docker image is created.
 Image is scanned (e.g., Trivy).
 Image is pushed to ACR.
@@ -103,40 +105,29 @@ Kubernetes performs a rolling update with health checks.
 
 ## 5.what are the basic steps/services involved in setting up ur ci/cd pipline and what rae all the services used in aks when frontend calls backedend explian the flow till reaches ur pod
 User Browser
-      │
       ▼
       DNS
-      │
       ▼
 Azure Front Door / Application Gateway
-      │
       ▼
 NGINX Ingress Controller
-      │
       ▼
 Kubernetes Service (ClusterIP)
-      │
       ▼
 Backend Pod (Java / Node.js)
-      │
       ▼
 Azure SQL / PostgreSQL / MySQL
-      │
       ▲
 Response
-      │
       ▼
 Service
-      │
       ▼
 Ingress
-      │
       ▼
 Application Gateway
-      │
       ▼
 Browser
-## 6.u have two services ww.amazon/producct and www.amazon/order and is this the respnesability of   ur loadbalancer to route oder/product service how will it able to route to these services (path based routing)
+## 6.u have two services ww.amazon/producct and www.amazon/order and is this the respnesability of  ur loadbalancer to route oder/product service how will it able to route to these services (path based routing)
 Browser
    │
 https://www.amazon.com/product or https://www.amazon.com/order
@@ -154,9 +145,9 @@ Product Pod
 that entire request is the API call=GET http://product-service/products/101
 Endpoint = House address.
 API Call = Going to that address and knocking on the door.
-## 7.what is the diffrence between loadbalancer and API   and how will u decide which one to use
-Load Balancer → "Which server or pod should handle this request?"
-API Gateway → "Is this request allowed, and which API should handle it?"
+## 7.what is the diffrence between loadbalancer and API and how will u decide which one to use
+Load Balancer → "Which server or pod should handle this request ?"
+API Gateway → "Is this request allowed, and which API should handle it ?"
 ## load blancer is used 
 High availability
 Traffic distribution
@@ -487,7 +478,7 @@ We periodically review and update base images to include the latest security pat
 ## 23.kubernetes cluster upgardes
 -----------
 ## syren cloud tech
-## 1.u are managing terraform for diffrent envs each env has its own vpc subnets and sg u wnat to resuse the same code and deploy seperate resources for as per      the env how will u structure terrafom code and state file for this
+## 1.u are managing terraform for diffrent envs each env has its own vpc subnets and sg u wnat to resuse the same code and deploy seperate resources for as per  the env how will u structure terrafom code and state file for this
 terraform/
 │
 ├── modules/
@@ -567,6 +558,7 @@ I analyze the application, identify ports, environment variables, secrets, stora
 docker images ls
 ## 18.how do you check event log of a kubeernets pod
 kubectl get events
+
 ------
 ## Delloite
 ## 1.can tell the differnce between pipline variables and variable groups.
