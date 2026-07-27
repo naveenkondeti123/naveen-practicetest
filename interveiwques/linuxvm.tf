@@ -43,7 +43,20 @@ RUN npm install --only=production
 
 EXPOSE 3000
 CMD ["node", "dist/index.js"]
+-----
+# Build Stage
+FROM maven:3.9-eclipse-temurin-17 AS builder
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
+# Runtime Stage
+FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]
+----
 1.hands on experience on writing docker file.   #kanerika ques
 syntax 
 docker/dockerfile:Rawgithub
