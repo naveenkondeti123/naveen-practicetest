@@ -1,4 +1,67 @@
-## PWC
+## PWC pune L1 sel
+## 1.what is diff between self hosted agent vs Microsoft hosted agent and which one ur using
+## 2.how can u integrate the selfhosted agent to ur connect with ADO pipeline
+project settings - agent pool
+"First, I create an Agent Pool in Azure DevOps. Then I provision a VM (Windows or Linux) where I want the self-hosted agent to run. I download the Azure Pipelines agent package, extract it, and configure it using the config.sh  script. During configuration, I provide the Azure DevOps organization URL, a Personal Access Token (PAT) with Agent Pool permissions, the agent pool name, and the agent name. Finally, I install the agent as a service and start it. Once the agent comes online in Azure DevOps, I reference the agent pool in my YAML pipeline."
+## 3. what is the rollback strategy ur using in ur project for AKS
+rolling updates
+## 4.what are the components of argocd
+ArgoCD has four main components: the API Server, which provides the UI and CLI access; the Repository Server, which fetches manifests from Git; the Application Controller, which continuously compares the Git state with the Kubernetes cluster and performs synchronization; and Redis, which is used for caching. In enterprise environments, Dex is commonly integrated to provide SSO authentication with Azure AD or LDAP.
+Git Repository
+      ▼
+Repository Server
+      ▼
+Application Controller
+      ▼
+Kubernetes Cluster
+      ▲
+API Server (UI/CLI)
+## 5.how ur argocd communicates with the aks and what will be there in helm charts and what are the dependencies ur storing in the helm charts and how ur are managing the helm charts for different env
+ArgoCD is deployed inside our AKS cluster. It continuously watches the Git repository for changes. When a new commit is detected, the Application Controller compares the desired state in Git with the live state in AKS. It then uses the Kubernetes API Server through its service account and RBAC permissions to apply the changes. Since ArgoCD runs inside the cluster, it securely communicates with the API server without needing external access
+Git Repo
+    ↓
+ArgoCD Repo Server
+    ↓
+Application Controller
+    ↓
+Kubernetes API Server
+    ↓
+AKS Cluster
+## 6. what is cni and CNI overlay
+CNI stands for Container Network Interface, which provides networking for Kubernetes pods. 
+In Azure CNI, both nodes and pods receive IP addresses from the Azure VNet, making pods directly reachable but consuming subnet IPs. 
+In Azure CNI Overlay, only the nodes receive VNet IPs, while pods receive IPs from an overlay network managed by Azure. This conserves VNet IP addresses, supports larger clusters, and is the recommended networking option for new AKS deployments
+## 7.what are the different probes in Kubernetes and usage 
+startup probe livness probe readiness probe
+## 8. write ur aks deployment.yaml and what is a namespace in aks and what is labels and selectors
+## 9.write terraform code for Kubernetes cluseter
+## 10.how many node pools do u have and what if the two node pools fails
+In our environment, the development cluster had 3 node pools with 2 nodes each. For production, the number of nodes was determined based on workload and autoscaling requirements. We enabled Cluster Autoscaler so the node count could increase automatically based on CPU and memory utilization.
+If two node pools fail, the workloads running on those node pools become unavailable initially. Kubernetes automatically tries to reschedule those pods onto the remaining healthy node pools,
+## 11.what are the failures u get in aks pods
+## 12. there is a major outage in aks hosted application what will u do
+"If there's a major outage in our AKS-hosted application, my first priority is to restore the service while keeping stakeholders informed. I follow a structured incident response process
+## 13.when user access ur app how request flows
+User
+   ▼
+Azure Front Door (Global LB + WAF)
+   ▼
+Application Gateway
+   ▼
+Istio Ingress Gateway
+   ▼
+Kubernetes Service
+   ▼
+Application Pod
+   ▼
+PostgreSQL / Redis / Kafka
+## 14.have u used nat gateway for external communication of pods
+in humana we have UserDefinedRouting(UDR)
+## 15.write a bash script for finding files changed in last 5hrs 
+## 16.if u have azure lb why using ingress as lb
+
+----
+## PWC -hyderabad
 ## 1.how are u creating the services like vnet subnets?
 ## 2.can u tell me what are the steps involed in terraform for deploying two services and how are u gng to do it
 For two microservices, I first provision the shared Azure infrastructure using Terraform. This includes the Resource Group, VNet, subnets, AKS cluster, Azure Container Registry, Key Vault, and monitoring resources. The pipeline runs terraform init, terraform validate, terraform fmt, terraform plan, and after approval, terraform apply. Once the infrastructure is ready, the application CI/CD pipeline builds each microservice independently, creates Docker images, pushes them to ACR, and deploys them to AKS using Helm charts or Kubernetes manifests. Each microservice typically has its own Deployment, Service, and Ingress, allowing independent scaling and updates
