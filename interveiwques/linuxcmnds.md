@@ -68,6 +68,46 @@ Historical CPU   | `sar`
 Disk Performance | `iostat`
 Open Files       | `lsof` 
 Logs             | `journalctl`, `dmesg` 
+----
+1.A federated cluster is a group of multiple Kubernetes clusters that are managed together from a single control plane or federation layer and Instead of managing each cluster separately, you can deploy and manage applications across multiple clusters from one place.
+
+
+"There are two types. In a Kubernetes Deployment, maxSurge controls how many extra pods can be created during a rolling update. In AKS node pool upgrades, maxSurge controls how many extra nodes Azure temporarily adds during the upgrade to safely drain and upgrade existing nodes with minimal downtime."
+--
+#!/bin/bash
+
+pods=$(kubectl get pods -n eeh-platform-dev | grep -i CrashLoopBackOff)
+
+if [ -n "$pods" ]; then
+    echo "List of crashed pods:"
+    echo "$pods"
+else
+    echo "No pods are in CrashLoopBackOff state."
+fi
+----
+#!/bin/bash
+GROUP="ansibleuser"
+USER="ansibleuser"
+
+# Create group if it doesn't exist
+if ! getent group $GROUP > /dev/null; then
+    groupadd $GROUP
+    echo "Group $GROUP created."
+else
+    echo "Group $GROUP already exists."
+fi
+
+# Create user if it doesn't exist
+if ! id $USER &>/dev/null; then
+    useradd -m -g $GROUP $USER
+    echo "$USER:Password@123" | chpasswd
+    echo "User $USER created and added to $GROUP."
+else
+    echo "User $USER already exists."
+fi
+
+
+
 
 
 
