@@ -1,6 +1,15 @@
 1.SSL Offloading means that a load balancer or Application Gateway handles SSL/TLS encryption and decryption, instead of the backend application server.
 2.A dynamic block is used to generate repeated nested configuration blocks inside a Terraform resource. Instead of manually defining multiple blocks, we use for_each with a dynamic block to create them automatically from a list or map. It's commonly used for security rules, NSG rules, subnet delegations, load balancer rules, and other nested configurations.
 3.Workload Identity Federation (WIF) is a secure authentication method that allows Azure DevOps pipelines (or GitHub Actions) to authenticate to Azure without storing secrets or Service Principal passwords (Instead of using a client secret, Azure DevOps obtains a short-lived OIDC (OpenID Connect) token, which Microsoft Entra ID validates before issuing an Azure access token.)
+4.What are Staging Slots in Azure App Service? (like a blue-green deployemt stratagy)
+Deployment Slots are separate environments within the same Azure App Service where you can deploy and test a new version of your application before making it live.
+The default slot is Production, and you can create additional slots like Staging, QA, or UAT.
+How it Works
+1.Users access the Production slot.
+2.Deploy the new application version to the Staging slot.
+3.Test the application in Staging.
+4.If everything is successful, perform a Swap.
+The Staging version becomes Production with minimal or no downtime.
 -----
 # Build Stage
 FROM maven:3.9-eclipse-temurin-17 AS builder
