@@ -100,12 +100,11 @@ fi
 # Create user if it doesn't exist
 if ! id $USER &>/dev/null; then
     useradd -m -g $GROUP $USER
-    echo "$USER:Password@123" | chpasswd
     echo "User $USER created and added to $GROUP."
 else
     echo "User $USER already exists."
 fi
-
+echo $user ALL=(ALL) NOPASSWD:ALL
 
 
 
