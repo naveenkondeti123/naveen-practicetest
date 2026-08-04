@@ -1,4 +1,34 @@
-Storage gcp abhishek day -5 gcp zero to hero1.cloud storage (gcs)buckets = used to store objects like (logs, backup,artifacts like war.jar) it's the cheapest solution it's 99.99999999999 durability 11-.9s and support multi region and has rbac for buckets/roles (eg storage object admin/storage viewer these given to service account)Storage class in gcs buckets with versioning a. Standard - high cost than othesb.nearline- more latency, low throughput than standard classC.cold line - less than nearline eg.3 months D. Archive- one year 2.filestore(azure like fileshare)= volume/files stored in this filestore able to share accross multiple vms (NoSQL)3.pub/sub - messaging service like event based service 4.datastore (bigtable) - nosql database like cosmos db in aws 5.bigqurrey - server less BigQuery is neither a traditional SQL database nor a NoSQL database.It is a fully managed, serverless data warehouse that uses SQL for querying.6.Cloud SQL- Relational Database SQL like Azure sql7.local sdd - block storage like can attached to vm to write data 
-Gcp hiracy =Google workspaces - organisation - folder - projects -resorcesGoogle Cloud Accounts         ▼Organization        ▼Folders (Optional)        ├── Production        ├── Development        └── Testing        ▼Projects        ├── Project-A        ├── Project-B        └── Project-C        ▼Resources(Compute Engine(E2 n2 c3 types), GKE, Cloud SQL, BigQuery, Storage, VPC, etc.)
-Load balncer public/private LBS and reginol/ global lb1.applicarion load balancer (asg in azure)Layer 7 and https/ https traffic 
-2.network load balancer nlbTcp/udp based traffic and layer 4
+Storage gcp abhishek day -5 gcp zero to hero1.cloud storage (gcs)buckets = used to store objects like (logs, backup,artifacts like war.jar) 
+it's the cheapest solution it's 99.99999999999 durability 11-.9s and support multi region and has rbac for buckets/roles (eg storage object admin/storage viewer these given to service account)Storage class in gcs buckets with versioning 
+a. Standard - high cost than othes
+b.nearline- more latency, low throughput than standard class
+C.cold line - less than nearline eg.3 months 
+D. Archive- one year 
+2.filestore(azure like fileshare)= volume/files stored in this filestore able to share accross multiple vms (NoSQL)
+3.pub/sub - messaging service like event based service 
+4.datastore (bigtable) - nosql database like cosmos db in aws 
+5.bigqurrey - server less BigQuery is neither a traditional SQL database nor a NoSQL database.It is a fully managed, serverless data warehouse that uses SQL for querying.
+6.Cloud SQL- Relational Database SQL like Azure sql
+7.local sdd - block storage like can attached to vm to write data 
+Gcp hiracy =Google workspaces - organisation - folder - projects -resorces
+Google Cloud Accounts         
+      ▼
+Organization        
+      ▼
+  Folders (Optional)          
+      ├── Production       
+      ├── Development        
+      └── Testing       
+      ▼
+    Projects       
+     ├── Project-A        
+     ├── Project-B        
+     └── Project-C        
+     ▼
+Resources(Compute Engine(E2 n2 c3 types), GKE, Cloud SQL, BigQuery, Storage, VPC, etc.)
+---
+Load balncer public/private LBS and reginol/ global lb
+1.applicarion load balancer (asg in azure)
+Layer 7 and https/ https traffic 
+2.network load balancer nlb
+Tcp/udp based traffic and layer 4
