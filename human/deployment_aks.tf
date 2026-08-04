@@ -1,43 +1,57 @@
-apiVerssion:platform.conflunet.io/v1
-kind: deploymet
+apiVersion: platform.conflunet.io/v1
+kind: Deployment
 metadata:
-    name: schemaregistrey
-    namespace: eeh-platform-dev
-
+  name: schemaregistry
+  namespace: eeh-platform-dev
 spec:
-    serviceAccountName: vault-authectication
-    replicas:4
-        resources:
-         limits:
-          memory:
-          cpu:
-         requests:
-          memory:
-          cpu:
-        affinity:
-           nodeAffinity:
-             requriedDuringSheduleIgnoreDuringExcution:
-            podAntiAffinity:
-              preferredDuringShedulingIgnoreDuringExcution:
-                podAffinityTerm:
-                  labelselectors:
-                    -key: app
+  replicas: 4
+  selector:
+    matchLabels:
+      app: schemaregistry
+  template:
+    metadata:
+      labels:
+        app: schemaregistry
+    spec:
+      serviceAccountName: vault-authentication
+      imagePullSecrets:
+        - name: docker-artifactory
+        - name: eeh-platform-dev-cr
+      initContainers:
+        - name: init-container
+          image: human-enterprise-platform-docker-virtual.jfrog/confluent/cp-init-container:7.9.2
+      containers:
+        - name: schemaregistry
+          image: human-enterprise-platform-docker-virtual.jfrog/confluent/cp-schema-registry:7.9.4-trust
+          ports:
+            - containerPort: 8081
 
-  deployment:
-   image_application: human-enterprise-plafrom-docker-virtual.jfrog/confluent/cp-schema-registrey:7.9.4-trust
-   image_init:human-enterprise-plafrom-docker-virtual.jfrog/confluent/cp-init-container:7.9.2
-   imagepullSecrets:
-    - docker-artifactory
-    - eeh-platform-dev-cr
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+            limits:
+              cpu: "2"
+              memory: "4Gi"
 
-   ports:
-        -continerPort:8081
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: app
+                    operator: In
+                    values:
+                      - schemaregistry
 
-    dependcies:
-    kafka:
-        bootstrapendpoint:
-        authectication:
-        type:oauth
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app: schemaregistry
+                topologyKey: kubernetes.io/hostname
 -----
 vm
 terraform {
