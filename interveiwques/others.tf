@@ -1,20 +1,6 @@
-# Stage 1: Build
-FROM node:18 AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-# Stage 2: Production
-FROM node:18-alpine
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY package*.json ./
-RUN npm install --only=production
-
-EXPOSE 3000
-CMD ["node", "dist/index.js"]
+1.SSL Offloading means that a load balancer or Application Gateway handles SSL/TLS encryption and decryption, instead of the backend application server.
+2.A dynamic block is used to generate repeated nested configuration blocks inside a Terraform resource. Instead of manually defining multiple blocks, we use for_each with a dynamic block to create them automatically from a list or map. It's commonly used for security rules, NSG rules, subnet delegations, load balancer rules, and other nested configurations.
+3.Workload Identity Federation (WIF) is a secure authentication method that allows Azure DevOps pipelines (or GitHub Actions) to authenticate to Azure without storing secrets or Service Principal passwords (Instead of using a client secret, Azure DevOps obtains a short-lived OIDC (OpenID Connect) token, which Microsoft Entra ID validates before issuing an Azure access token.)
 -----
 # Build Stage
 FROM maven:3.9-eclipse-temurin-17 AS builder
