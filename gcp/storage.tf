@@ -1,5 +1,6 @@
-Storage gcp abhishek day -5 gcp zero to hero1.cloud storage (gcs)buckets = used to store objects like (logs, backup,artifacts like war.jar) 
-it's the cheapest solution it's 99.99999999999 durability 11-.9s and support multi region and has rbac for buckets/roles (eg storage object admin/storage viewer these given to service account)Storage class in gcs buckets with versioning 
+Storage gcp abhishek day -5 gcp zero to hero
+1.cloud storage (gcs)buckets = used to store objects like (logs, backup,artifacts like war.jar) it's the cheapest solution it's 99.99999999999 durability 11-.9s and 
+support multi region and has rbac for buckets/roles (eg storage object admin/storage viewer these given to service account)Storage class in gcs buckets with versioning 
 a. Standard - high cost than othes
 b.nearline- more latency, low throughput than standard class
 C.cold line - less than nearline eg.3 months 
