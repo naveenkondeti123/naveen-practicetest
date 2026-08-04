@@ -4,7 +4,7 @@ metadata:
     name: schemaregistrey
     namespace: eeh-platform-dev
 
-spec
+spec:
     serviceAccountName: vault-authectication
     replicas:4
         resources:
@@ -23,11 +23,15 @@ spec
                   labelselectors:
                     -key: app
 
-  images:
-   application:
-   pullSecretRef:
+  deployment:
+   image_application: human-enterprise-plafrom-docker-virtual.jfrog/confluent/cp-schema-registrey:7.9.4-trust
+   image_init:human-enterprise-plafrom-docker-virtual.jfrog/confluent/cp-init-container:7.9.2
+   imagepullSecrets:
+    - docker-artifactory
+    - eeh-platform-dev-cr
+
    ports:
-        -continerPort:8090
+        -continerPort:8081
 
     dependcies:
     kafka:
