@@ -1,4 +1,25 @@
-## PWC pune L1 sel
+## Ltm L1 Pune
+## 1.how do u achieved this Dr setup for ur project
+## 2.can u explain the ci/cd flow or ur application and stages
+## 3.what are the components of argocd
+## 4.i have a application and code in git and now i want to integrate it with argocd
+## 5.can u explain the terraform structure of ur infra and state file management
+## 6.u have applied tf plan and u saw it has to create 6 resources but out of its 3 resources say destroy and dont want to destroy these as they are prod 
+## 7.how do u integrate state lock in terraform and state file integration to GitHub
+## 8. there is a drift in terraform and someone deleted state file how to recover it back
+## 9.one of the user did deployment in gke and some user see 50% of traffic is older version 
+ reason deployment failed mid way in canary deployment
+## 10.how can u ensure there is no downtime and explain blue green and canary and which is best deployment
+blue green = fast and costly (more resources req) and canary = less resources used and more time taken
+## 11. when u did deployment in India and Singapore and Indian people who access the app face latency because they are connecting to Singapore and not from India what might be the reason (and interviewer says its due to deployment)
+Was the Singapore endpoint accidentally configured as the default
+Verify backend pools and routing rules.
+Ensure the India backend is still registered and healthy. If the India deployment is failing readiness or health checks, Azure Front Door/Traffic Manager will route traffic to the healthy Singapore backend.
+## 12. explain the flow of ur request in ur project
+## 13.have u worked on Istio and what is tls
+## 14.there are 3 pods and pvc attached to it some one deleted the pod and pvc also got deleted and i want to make sure it should not happen (prevent destroy on deleteion)
+-----
+## PWC pune L1 sel-sagar
 ## 1.what is diff between self hosted agent vs Microsoft hosted agent and which one ur using
 ## 2.how can u integrate the selfhosted agent to ur connect with ADO pipeline
 project settings - agent pool
@@ -59,7 +80,27 @@ PostgreSQL / Redis / Kafka
 in humana we have UserDefinedRouting(UDR)
 ## 15.write a bash script for finding files changed in last 5hrs 
 ## 16.if u have azure lb why using ingress as lb
-
+----
+PWC L2 guarav
+## 1.can u explain the helm chart usage in ur project and what are all the manifest ur having
+## 2.can u explain the end to end argocd setup for deployment in aks
+## 3.explain how pod to pod communication happens and explain the cni plugin works
+## 4.how do pods get ubique ip address (azure cni overlay)
+## 5. if any application hosted on aks how do we expose the application to internet
+## 6. write a bash script to print max ip with get request and filter the log uisng get request
+#!/bin/bash
+logfile="access.log"
+echo "IP with maximum GET requests:"
+grep '"GET' "$logfile" | awk '{print $1}' | sort | uniq -c | sort -nr | head -1
+## 7.what are the key blocks in main.tf eg vm
+provide/resources/vet/subnet/nsg/vm block
+## 8. what is explicit dependency and how do u define it terraform
+An explicit dependency tells Terraform that one resource must be created only after another resource, even if Terraform cannot automatically determine the dependency.
+resource "resource_type" "resource_name" {
+  depends_on = [resource_type.resource_name]
+}
+## 9.tell me what is the diff between a data block and module block
+## 10.how can we use single mian.tf for multiple environments (for_each)
 ----
 ## PWC -hyderabad
 ## 1.how are u creating the services like vnet subnets?
@@ -128,7 +169,7 @@ Blocker Issues	0
 Our SAST quality gate was implemented using SonarQube. We configured conditions such as zero blocker and critical issues, zero new vulnerabilities, Security and Reliability ratings of A, code coverage above 80%, and duplicate code below 3%. After the SonarQube scan, the pipeline waited for the Quality Gate result. If any condition failed, such as a critical vulnerability or insufficient code coverage, the pipeline stopped automatically, preventing the application from being deployed to higher environments.
 
 ---
-## PWC PUNE
+## PWC PUNE -nimanshu level diff
 ## 1.where u have hosted the web application frontend techstack in ur project currently? (react/angular/java script-frontend)
 React js
 ## 2.is ur application is a microsevice based application and how many services are there on the backend and why multistack used some sevices on java and some on nodejs (naveen u mentioned used java&nodejs)
@@ -702,10 +743,13 @@ How u will  chek user permisions amd wehre users are list in server (/home)
 What are the cost optimization used in azuzre
 Do u know linevess qnd readiness probe
 For ubntu nad nginix servers how u change http to https
+-----
+## microland
 
-## 
-## 
-## 
-## 
+## 1.can u explain day to day activities on azure cicd and terrafom?
+## 2.how do u take backup of ur vms?
+## 3.expain terraform lifecyle polices and statefile setup and issues u faced in
+## 4.how u are securing the workloads in azure?
+-------
 ## 
 ## 
