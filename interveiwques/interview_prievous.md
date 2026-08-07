@@ -1,3 +1,91 @@
+## KPMG R1
+## 1.can u write a terraform code for creating module or for creating a resource main.tf and var.tf 
+## 2.what are the types of variables and where u used map and list
+ string, list, map
+## 3.can u tell me steps of Ur ci/cd for a application deployment pipeline
+## 4.how u are connecting ado with azure and inside the service connections what are u using 
+    1.service conn= app reg, tokes 2.managed identity 3.worklod identity federation
+## 5.u having a setup of multiple pipelines and they are using common variables how do u store variables
+   variable group
+## 6.u are using GitHub and make sure no hardcoded vales or passwords how u prevent them to prevent them before pushing to git repo
+   terraform sentinel and Microsoft defender for cloud 
+## 7.can u tell me what are dynamic block in terraform
+   it used to create multiple nested blocks inside a block like nsg ports
+## 8. what are deployments slots in app services
+   Deployment Slots are separate live environments within the same Azure App Service. They allow you to deploy and test a new version of your application without affecting  production users.
+ Common slots:
+ Production (default)
+ Staging
+## 9. have u worked on RBAC polices initiatives and have u created any polices in azure
+## 10. have u created any custom polices and done any remediation
+## 11.any experience with configuring and logging across subscriptions
+## 12. if i want provide access a person for particular time then how would i grant access (time bound access) and if wnat to provide elevated acess how u will provide for that user and have u worked on privilaged identity acess management
+PIM=Microsoft Entra PIM to provide just-in-time privileged access. Instead of permanently assigning roles like Contributor or Owner, we made users eligible for the role. They activated it only when needed using MFA and approval, and the access was automatically removed after the configured duration."
+## 13. have u worked with key vault in azure
+## 14.managed identity vs service principles
+## 15.how are u exposing the pods outisde internet
+Pods are exposed internally using a ClusterIP Service.
+An Ingress Resource defines host/path-based routing.
+The NGINX Ingress Controller watches the Ingress resource.
+The Ingress Controller exposes a LoadBalancer service, which gets a public IP.
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: app.example.com
+## 16.any experience for setting up dashboards for Grafana 
+## 17.have u added a approval stage before tf apply
+## 18.have u configure any agent pool and why self hosted agent
+---
+## KPMG R2
+## 1.can u walk me ur infrastructure and resources u created and how u integrated and how network flow
+## 2.the application lb receives the request from outside is the same lb sending the req to ur application 
+(ingress send to schemaregistrey and to bootstarp of pods)
+## 3.are u creating any modules for creating the infra using terraform
+## 4.the application gateway need backed pools how u manage them 
+add the config in terraform code config while creating the lb 
+resource "azurerm_application_gateway" "appgw" {
+
+  backend_address_pool {
+    name = "backendpool"
+
+    ip_addresses = [
+      "10.0.1.4",
+      "10.0.1.5"
+    ]
+  }
+  backend_http_settings {
+    name                  = "http-setting"
+    port                  = 80
+    protocol              = "Http"
+    cookie_based_affinity = "Disabled"
+  }
+}
+## 5. in aks ingress e how u mention the backend pool (Ingress → Service → Pods → Kafka)
+The Ingress does not send traffic directly to the pods.
+It sends traffic to the Kubernetes Service, and the Service forwards the traffic to the pods selected by its labels.
+( mentioned in deployment.yml)labels:
+  app: kafka-app 
+ ( mention in service.yaml)
+  spec:
+  selector:
+    app: kafka-app
+  ports:
+  - port: 80
+    targetPort: 8080
+We use an Ingress to expose our application. The Ingress handles HTTP/HTTPS requests coming from the Application Gateway or Load Balancer and routes them to the appropriate Kubernetes Service. The Service forwards the traffic to the application pods. The application running in those pods then communicates with the Kafka brokers
+## 6.how ur terraform repo looks like and how ur passing info for storing the things to state file in terraform cloud
+## 7.ur workflow havs a spn creds to connect to terrafrom cloud enterprise  and store the staefile and refered as spn= $ {{spn_id}} andterafom only accpets the var.tf how it works
+## 
+## 
+## 
+## 
+## 
+## 
+
+
+
+
+----
 ## Ltm L1 Pune
 ## 1.how do u achieved this Dr setup for ur project
 ## 2.can u explain the ci/cd flow or ur application and stages
@@ -751,5 +839,54 @@ For ubntu nad nginix servers how u change http to https
 ## 3.expain terraform lifecyle polices and statefile setup and issues u faced in
 ## 4.how u are securing the workloads in azure?
 -------
-## 
-## 
+## Relisoft L1 ai spins
+## 1.vmss in azure
+## 2.modules in terraform
+## 3.root vs child module
+## 4.how to remove a particular resource from state file 
+remove resource from state and toggle the config in code and terraform will not manage that resource
+## 5.terraform import and data block
+## 6.difference bwteeen var.tf and terafom.tfvars which will override the other
+ default values in var.tf and to var.tf will be override by tf.tfvars values and .tfvars will have priority
+## 7.docker challenges compared to k8s and what is containerization 
+## 8.how u know the container runs on which image and write a docker file
+## 9.diff entrypoint vs cmd
+## 10.how to reduce the image size in docker
+## 11.advantages of k8s and k8s upgrade mechanism u used in cluster
+## 12.how hpa scales and add pods in k8s 
+   Kubernetes has metric server this hpa reads this continuously it scales based on that
+## 13.how do vpa works and scales
+## 14.have u used crds in aks and why it is used
+## 15.what is svc in aks and how it works 
+   labels and selectors instead of ips
+## 16.how does nodes and pods get ips in aks
+   azure CNI overlay in azure 
+## 17.what is node-pool and why it is used
+## 18.how to schedule pods on particular nodes and do want other pods to run on that nodes
+  taint and tolerations
+## 19.what is cordon node
+  cordon nodes means un-scheduling pods on a node used in upgrades
+## 20.what happens when we apply deployment.ymal and internal flow to k8 components
+## 21.what is stateful-set  and demon-set and jobs
+## 22.what is replicaset
+## 23.can u write single deployment.ymal for 2 pods with 2 images for 2 apps (not poiible)
+ we can not run 2 images for 2 pods in single ymal but we can run 1 image for main cont and 1 image for side car cont
+## 24.what are the pipeline format and how do u validate a pipeline ymal and how to run multiple parallel stages(multiple stages with diff agent pool per stage)
+stages
+ stage
+  jobs
+   job
+    step
+     task
+## 25.what is a service connection in ADO
+## 26.from scrath u have to setup terafom for env from scratch
+ workflows/config/varibles/secrets/pull-request/spn/roles/vault
+## 27.what is the roles ur using for storage access
+ storage blob contributor/ storage blob reader /storage blob editor
+## 28.what are errors u faced in aks what is oom-killed and how u debug a failed pod AND USGAE OF A NAMESPACE
+## 29.cmd to list deployments in k8 and what are init containers
+## 30.have u worked on severless (logic apps/functions) and what are web apps
+## 31.what is ssl offloding
+## 32.what is diff between front-door and traffic manager vs application lb vs ingress lb
+----
+
