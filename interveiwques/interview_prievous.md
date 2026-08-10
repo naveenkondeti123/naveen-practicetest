@@ -74,16 +74,12 @@ It sends traffic to the Kubernetes Service, and the Service forwards the traffic
     targetPort: 8080
 We use an Ingress to expose our application. The Ingress handles HTTP/HTTPS requests coming from the Application Gateway or Load Balancer and routes them to the appropriate Kubernetes Service. The Service forwards the traffic to the application pods. The application running in those pods then communicates with the Kafka brokers
 ## 6.how ur terraform repo looks like and how ur passing info for storing the things to state file in terraform cloud
-## 7.ur workflow havs a spn creds to connect to terrafrom cloud enterprise  and store the staefile and refered as spn= $ {{spn_id}} andterafom only accpets the var.tf how it works
-## 
-## 
-## 
-## 
-## 
-## 
-
-
-
+## 7.ur workflow have a spn creds to connect to terraform cloud enterprise  and store the state file and referred as spn= $ {{spn_id}} and terraform only accepts the var.tf how it works referenced from workflow to terraform
+## 8.when u trigger  a pipeline how its works and how its changing the active to passive region switch 
+## 9.when u say zookeeper installed in vm and how it was deployed that in vm
+## 10.have u provisioned the helm charts or using the existing charts
+## 11.how u are managing the helm charts for multiple envs and single set of helm charts
+## 12.if u are referring the helm to central dev how are u referencing that in ur pipeline or command line that the command ur running the helm command to say that this is the particular file that u have to pick for values and is there any pirticular command u run helm command to pick the manifest file from repo to aks
 
 ----
 ## Ltm L1 Pune
@@ -889,4 +885,15 @@ stages
 ## 31.what is ssl offloding
 ## 32.what is diff between front-door and traffic manager vs application lb vs ingress lb
 ----
+## bajaj L1
 
+## 1.can u brief me more on how u have setup the Dr for the projcet
+## 2.how ur traffic is switching from east to central where the switch happens and what makes it happen
+## 3.how the traffic switches in terms of DNs in terms of connectivity which services comes in pitcurewhen we say that u want to re-route the traffic
+## 4.write a code for 2 vpc creation and subnets using terraform
+## 5. i have a vm in private network and have acr in private network and make sure that vm has to fetch images form acr how to achieve this
+## 6. what is managed identity
+## 7.explain the arch of Kubernetes
+## 8.what is service principals secret going to expire how can we automate that and the terraform also needs to use that spn and how will u copy the secret from spn to key vault
+## 9.u have to upgrade cosmos db running on v6.0 and have to upgrade to next version v7.0 how can we do that
+---
