@@ -884,6 +884,25 @@ stages
 ## 30.have u worked on severless (logic apps/functions) and what are web apps
 ## 31.what is ssl offloding
 ## 32.what is diff between front-door and traffic manager vs application lb vs ingress lb
+
+---
+## Relisoft L2
+## 1.what kind of SLA do u have in project
+## 2.how many applications ur cicd piplines ur supporting and what errors ur facing in ur piplines
+## 3.how are u integrating secqurity compliance for ur piplines
+ sonarqube sast sacns
+## 4.who is responsible for setting up the security scans is that u and is this sonar scan integrated to every cicd pipeline or running outside
+## 5. what kind of observability u have in ur project setup
+## 6.how do u measure the success rate of pipeline cicd
+## 7.do u have any criteria that cicd pipeline can be executed
+## 8.currently are u using classic and yaml based pipelines and what diff u see mostly
+## 9.the cd piplines will it release by default to run in parllel stages
+## 10.have u integrated any automation bash scripts in current project and what problem u solved by this approch
+## 11.on what parameters u decide to use ansible/github/terrafom in project purposes
+## 12.how to ensure speed and stability in pipelines and how u run parallel builds
+## 13.how have u implemented rbac security in projet (lest privileges ,rbac in aks ,role bindings, crds)
+## 14.r u using any kind of ai tools to increase productivity
+
 ----
 ## bajaj L1
 
