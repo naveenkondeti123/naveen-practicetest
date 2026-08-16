@@ -916,3 +916,48 @@ stages
 ## 8.what is service principals secret going to expire how can we automate that and the terraform also needs to use that spn and how will u copy the secret from spn to key vault
 ## 9.u have to upgrade cosmos db running on v6.0 and have to upgrade to next version v7.0 how can we do that
 ---
+## persistent L1
+## 1.can u explain the architecture of Kubernetes (control plane, data plane)
+## 2.what happens when etcd becomes unavailable
+If etcd becomes unavailable in AKS, the primary impact is on the Kubernetes control plane because etcd stores the cluster's desired and current state. The API server cannot reliably persist or retrieve cluster state, so operations such as creating, updating, scaling or deleting resources can fail. Existing workloads that are already running on worker nodes can generally continue serving traffic because they don't depend on etcd for every application request. Since AKS is managed Kubernetes, Microsoft is responsible for maintaining the control plane and its availability
+## 3.when service A is unable to communicate service B how to debug
+First I check whether both pods are healthy and ready. Then I verify Service B and its selector, followed by checking the EndpointSlices to make sure the Service actually has backend pod IPs. From Service A's pod, I test DNS resolution of Service B. Then I test connectivity using curl or nc. If DNS works but connectivity fails, I check NetworkPolicies, ports, targetPort and AKS networking. Finally, I check Service B's application logs and verify that the application is listening on the expected interface and port.
+## 4. when a deployment got stuck in aks how to resolve this
+kubectl get deployment <deployment> -n <namespace>
+If a Deployment is stuck in AKS, I first check kubectl rollout status and kubectl describe deployment to identify why the rollout isn't progressing. Then I check the ReplicaSet and pod status. Depending on the state, I investigate scheduling/resource constraints, image pull failures, application crashes, readiness/liveness probes, configuration or secrets, and NetworkPolicies. I also check pod and deployment events. If the new release is causing the issue and production impact is occurring, I use kubectl rollout undo to return to the last known good version, then investigate the failed release before redeploying
+## 5.why we have to use liveness-probe and reediness probe in Kubernetes
+## 6.which deployment strategy used in ur project
+## 7.in Kubernetes what is the role of a storage class (pvc & pv)
+## 8.multiple teams using one single aks cluster how to isolate these workloads (namespaces)
+## 9.suppose docker push fails with denied error what will u check then and what is imagepull secrt
+  1. authectication - service principal or managed identity
+  2.Rbac --role AcrPush
+  3.I check ACR network restrictions, private endpoints and firewall configuration if authentication and RBAC look correct.
+## 10.a developer says docker build successfully and containers starts success but healthcheck fails contiously and how do u debug a container
+docker inspect <container-name>
+First I'd check container logs and inspect the health-check failure output. Then I'd verify the health endpoint, port, HTTP response code and whether the required health-check utility exists in the image. I'd also verify that the application is listening on the expected interface and port. If this is running in AKS, I'd check the readiness/liveness/startup probes and pod events. Finally, I'd check whether the health endpoint depends on external services such as Kafka or a database. If the application has a slow startup time, I'd configure an appropriate startup probe rather than simply increasing the liveness timeout.
+## 11.who actually pulls the image from registry
+the image is actually pulled by the container runtime running on the worker node,
+containerd → actually pulls the image from the registry.
+## 12.write a java/python based docker file and y we use multistage build
+## 13.how did u reduce the azure devops pipline time by 30%
+## 14.how do u handle multiple microservices in ur project
+## 15.how do u handle security in pipeline
+## 16.suppose ur pipeline fails with state lock error
+## 17.what command used to unlock state lock
+   terraform force-unlock <LOCK_ID>
+## 18.terraform plan showing to destroy RDS db and others to create vms and how to handle only create resources (crate resources using target)
+## 19.terafom state file stored locally and now team has 20 developers now what will u change for large envs how can u use and y local state file is issue
+## 20. create terraform code to create resources vm nsg subnet 
+## 21.what is usage of azure storage service
+## 22.how do u create 10 vms in single module (count,for each)
+## 23.write a bash script to find pods that restarted more than 5 times
+#!/bin/bash
+set -euo pipefail
+NAMESPACE="eeh-platform-dev"
+echo "Pods restarted more than 5 times:"
+echo "----------------------------------"
+kubectl get pods -n "$NAMESPACE" --no-headers | \
+awk '$4 > 5 {print "Pod:", $1, "| Restarts:", $4}'
+----
+##
