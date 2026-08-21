@@ -961,4 +961,27 @@ echo "----------------------------------"
 kubectl get pods -n "$NAMESPACE" --no-headers | \
 awk '$4 > 5 {print "Pod:", $1, "| Restarts:", $4}'
 ----
-##
+## Persistent L2
+interviewer Sarvesh client-HDFC
+## 1. introduce yourself what projects u have done and services used in ur project
+## 2.soppose u have to deploy 20 microservices in aks for a banking application u have to ensure zero downtime autoscaling and private connection between db and have external access and workload isolation nd how do u design ur aks platform and application deployment u can aks me through major components ur using and why 
+## 3.ur manifest file changed in prod.yaml file and changed the git confing what happens and how u will handle
+## 4.i am giving u manifest file in chat and u have to go through that file and this file causing my pods to stuck in crash state and how u investigate this
+## 5.do u think this manifest is ok or does it have any errors causing latest deployment failure
+## 6.what will u get when u are describing this deployment file using kubectl
+## 7.u are getting 503 502 errors in Kubernetes how will u resolve this where u will start checking in first place
+## 8.so u are responsible for creating reusable terraform code for 10 resources using terraform code for different subscription each sub having different networking and env specific config and security baseline must stay consistent so how would u design reusable terraform code
+## 9.an engineer manually changed ur NSG rule in azure due to a prod incident and its resolved due to that and in next terraform plan it shows error the application team says that the manual change must remain how u suggest this approach
+## 10.ur terraform state have the information about infrastructure and sensitive attributes and how u secure in enterprise level
+## 11.u have a scenario using opensource terraform and u dont have a workspaces to store the state file in that sort of scenario any idea how u  can u secure
+## 12.the azure PostgreSQL server working fine yesterday but suddenly its not able to connect today and the pods is healthy even database is up and running can  u talk about how y trouble-shoot the network part
+## 13.how do u determine this is a dns problem its routing correct or may be firewall issue
+## 14.u have a high raise application u want to expose this new released application to 5% of users only can u talk about what strategy u can choose and implement at lb level
+## 15.what metrics do u determine when u move traffic from 5 to 25% now what metrics u consider for moving to next percentage
+## 16.ur security says that no image that contain critical CEV should reach to production so if u want to enforce the same in pipeline in what stages u mention
+## 17.an application have an slo of 99.5%  what things would u monitor to determine Wheater u are meeting the targets
+## 18.ur dashboard says 88.95% availability but the customer's are reporting failures how to sort this
+## 19.its 11am in the night u have received a critical production app deployed in aks starting trowing 5xx errors and the same time u see cpu normal mem normal and some pods are running and some are in restarting and app latency got increased and the deployment which lead to this happens so assuming u are on call engineer can u walk me through the resolution way  since u received this incident to resolution 
+## 20.do u have any questions before we warp up
+ 
+
