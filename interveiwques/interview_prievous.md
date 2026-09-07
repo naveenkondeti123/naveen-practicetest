@@ -75,7 +75,7 @@ It sends traffic to the Kubernetes Service, and the Service forwards the traffic
 We use an Ingress to expose our application. The Ingress handles HTTP/HTTPS requests coming from the Application Gateway or Load Balancer and routes them to the appropriate Kubernetes Service. The Service forwards the traffic to the application pods. The application running in those pods then communicates with the Kafka brokers
 ## 6.how ur terraform repo looks like and how ur passing info for storing the things to state file in terraform cloud
 ## 7.ur workflow have a spn creds to connect to terraform cloud enterprise  and store the state file and referred as spn= $ {{secret.spn_id}} and terraform only accepts the var.tf how it works referenced from workflow to terraform
- add the value in GitHub settings->actions->secret & variables-> value
+ add the value in GitHub settings->secrates and varibales >actions->secret & variables-> value
 ## 8.when u trigger  a pipeline how its works and how its changing the active to passive region switch 
 ## 9.when u say zookeeper installed in vm and how it was deployed that in vm
 ## 10.have u provisioned the helm charts or using the existing charts
