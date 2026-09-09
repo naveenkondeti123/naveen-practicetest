@@ -984,4 +984,57 @@ interviewer Sarvesh client-HDFC
 ## 19.its 11am in the night u have received a critical production app deployed in aks starting trowing 5xx errors and the same time u see cpu normal mem normal and some pods are running and some are in restarting and app latency got increased and the deployment which lead to this happens so assuming u are on call engineer can u walk me through the resolution way  since u received this incident to resolution 
 ## 20.do u have any questions before we warp up
  
+------
+## new Vision
+## 1.how ur day to day activities look like which kind of tickets u receive
+## 2.what are the recourses ur provision using terraform for env specific like azure ec2 or aws instances and what is ur repo git or azure repos and why git for infra and azure for application codes
+## 3.what is ur branching strategy in ur peoject
+## 4.how ur build validation takes place if build evaluation and validation fails how are u going to trouble shot that particular isuues
+## 5.u are writing terraform code for infra provision what will happen when we run terraform init
+## 6.what is the purpose of state lock file 
+## 7.i am working on terraform resources priovising i can see my plan is success but i can see  with apply pipeline got success but i can see there is some resources  destroying and some are recreating so why this kind is happing there 
+## 8.incase of destroyiong piticular resouce in trafform which command is used
+## 9.how many types of shell are there in bash scripting ( shell,bonshell eg)
+| Shell    | Full name                  | Common command  |
+| -------- | -------------------------- | --------------- |
+| **sh**   | Bourne Shell               | `/bin/sh`       |
+| **bash** | Bourne Again Shell         | `/bin/bash`     |
+| **ksh**  | Korn Shell                 | `/bin/ksh`      |
+| **csh**  | C Shell                    | `/bin/csh`      |
+| **tcsh** | TENEX C Shell              | `/bin/tcsh`     |
+| **zsh**  | Z Shell                    | `/bin/zsh`      |
+| **fish** | Friendly Interactive Shell | `/usr/bin/fish` |
+
+## 10.in bash if i want to print particular number to particular person from a file naveen.txt and print the users and their numbers from file
+awk '{print "User:", $1, "Number:", $2}' naveen.txt
+## 11.can u write a deployment.ymal file for k8s
+## 12.from where excatly ur docker image is comming from and how its getting crated and suppose u wnat to check image and  docker version  
+docker --version and image= docker image ps
+## 13.when i did a deployment post deployment i can see microservices are running fine but still i can see some pods are in pedning state and what is the issue and how to resolve this issue
+## 14.how u have implimented the blue green/canary deployment explain
+## 15.how the security is managed in ur current project
+## 16.do u know sha and sha2 hash alogorithm
+SHA = Secure Hash Algorithm.(It is a one-way cryptographic hash function that takes input of any size and produces a fixed-size hash)
+SHA is a family of cryptographic one-way hash algorithms. SHA-2 is a newer family that includes SHA-256, SHA-384 and SHA-512. SHA-256 generates a 256-bit fixed-length digest and is commonly used for integrity verification, Docker image digests, certificates and security-related applications. SHA-1 is considered insecure for collision resistance, so SHA-2 is preferred for modern systems.
+## 17.once u have changed the password rotation what things u need to take in ur application so its ruinning fine 
+## 18.yesterday  have changed client id and secret in Hashi crop key vault for the application the pipeline is not picking the correct value what might be the isuue
+Secret was updated incorrectly
+Pipeline is reading a different Vault path
+pipeline is explicitly requesting an old version
+Pipeline variable is overriding Vault
+## 19.what is the last production issue u faced and what is the  isuue
+----
+## new vison L2
+## 0.we have k8s and i have deployment A and deployment B and deployment A has to access secret from vault and deployment b should not have the access to that secrets
+Namespace can help, but namespace alone is not enough to guarantee that Deployment B cannot access Deployment A's Vault secret.
+For a secure AKS design, use separate namespaces + separate Kubernetes ServiceAccounts + Vault policies/roles.
+## 1.in terraform has a file lock.hcl file why would we need to keep that in repo why it is useful
+.terraform.lock.hcl is committed to the repository to ensure Terraform uses consistent provider versions and verifies provider package checksums across developer machines and CI/CD pipelines. It makes Terraform execution more predictable and reproducible.
+## 2.there are 2 persons working on terraform code working on a fetaure branch and  dev1 is done with chnages and dev2 also has his changed how we can raise pr request for this senario
+If both developers are contributing to the same feature and both changes are ready, they can work on the same feature branch and raise one PR containing both changes. But if Dev1 is ready and Dev2 is still working, I would use separate feature branches and separate PRs. This keeps the PRs isolated, makes Terraform plan/review easier, and prevents incomplete changes from being merged.
+## 3.u have a task to change Microsoft azure hosted runner the  runner to a selfhosted in pipline and devlopers sholud not recive a  queue for pipline and u need to ensure to follow certain best practice's of agent maintenance what wolud u recommend this kind of senario and how u suggest 
+I would create a dedicated self-hosted agent pool with multiple agents and preferably use Managed DevOps Pools or VM Scale Set agents for autoscaling. I would keep a minimum number of standby agents so normal pipelines start immediately and configure a maximum capacity to handle peak parallel builds.
+## 4.we have docker build pilpine and its taking long time how to optmise this pipline
+----
+
 
