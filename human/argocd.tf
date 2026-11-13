@@ -47,7 +47,7 @@ Add weebhook so that automatic chages updaed in git to sync to argocd
 Argocd login from cli server - argocd login (ip adrees) 
 ----
 Argo roolouts for blue green depoymnet zero downtime
-
+crate a namsepace for argorollouts and add the zip from gihtub urls
 1.rollout.yaml
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
