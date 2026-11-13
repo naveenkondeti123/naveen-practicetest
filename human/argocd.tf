@@ -45,3 +45,59 @@ For using helm files we have to give the sourec=git repo link and path= helm fol
 7.destination - kubernts svc (cluster url) and ns - prod/dev
 Add weebhook so that automatic chages updaed in git to sync to argocd
 Argocd login from cli server - argocd login (ip adrees) 
+----
+Argo roolouts for blue green depoymnet zero downtime
+
+1.rollout.yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: nginx-rollout
+  namespace: dev
+spec:
+  replicas: 4
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+
+  strategy:
+    blueGreen: 
+      activeService: nginx-active    # live traffic service ( old blue version )
+      previewService: nginx-preview  #stagging/preview traffic ( new green version)
+      autoPromotionEnabled: false    # requires manual promotion
+      scaleDownDelaySeconds: 30
+---
+ and we shold have 2 more yamls for ingress.yaml and service.yaml and match them using secltors & matchlables
+in ingress we metion the path based routing as 
+
+apiversion:networking.k8s
+ kind:ingress
+ metadata:
+  spec:
+  ingressclassname:nginx
+  rules:
+   -http:
+     paths:
+      -path: /stagging  # stagging new
+        backend:
+         service:
+          name: demo-app-svc-preview (/stagging menas new green verison)
+          port: 
+              -80
+       -path: /   #live  old
+            backend:
+             service:
+              name: demo-app-svc (/ menas old blue verison)
+              port: 
+                  -80
