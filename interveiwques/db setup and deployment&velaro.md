@@ -52,4 +52,28 @@ Suppose the canary starts producing errors.
 3. V2 pods are removed or rolled back.
 4. Any database writes that V2 already committed remain in PostgreSQL.
 Again, safe rollback depends on backward-compatible database changes. A V2 transaction that already successfully committed is not undone by rolling back the pods.
+---
+velaro
+prerequsite
+1.resource group , storage account (blob conatinaer), princicpal account(with role asssigment contributer rbac )
+velaro installation commands in aks cli cluster
+velaro install'
+ --provider azure'
+ --plugin velaro/velaro-plugin-for-microsoft-azure:v.1.8.0'
+ --bucket $blob_conatiner
+ --secret-file .\credintials-velaro'
+ --backup-location-config "useAAD=true.resourcegroup= ,storage_account= ,azure-backup-subscriptiom= "
+ --snapshot-location-config
+ --fetures=enableCSI-use-volume-snapshots=true
 
+ pass the requried values
+azure subscrtionid=
+ azyure tenat
+ azure clinet 
+ resource group
+ 
+and velaro cmds in aks cluster to crate backup on ns
+1.velaro backup caretae <name> --include -namespace defult
+2.velaro crate shedule daily/wweely/montly
+backup and restore commands for velaro
+3.velaro restore crate <name> --include -namespace defult <backupname>
