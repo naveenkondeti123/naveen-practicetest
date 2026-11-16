@@ -201,6 +201,9 @@ job:
  test & build:
    runs-on: humana-runner-cld3
    env: dev
+   app: ${var.app}
+   acr-name:${var.acr-name}
+   image_tag: ${github.run-number}
   steps:
   name:checkout-code
    -uses: actions/checkout@v2
