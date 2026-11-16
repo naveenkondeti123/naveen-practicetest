@@ -184,13 +184,21 @@ jobs:
       run: |
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
+--- latest github workflow using fedrated cred for acr login
 
+GITHUB
+name: ci infra wokflow
 
-   
+on:
+ push:
+  branches:
+   -main
+on:
+ pull_request:
+  branches:
+   -main   
 
-
-
-
+job:
 
 
 
