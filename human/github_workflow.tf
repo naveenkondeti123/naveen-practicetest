@@ -197,8 +197,41 @@ on:
  pull_request:
   branches:
    -main   
-
 job:
+ test & build:
+   runs-on: humana-runner-cld3
+   env: dev
+  steps:
+  name:checkout-code
+   -uses: actions/checkout@v2
+  name:setup-java
+   -uses: actions/setup-java@v2
+    with:
+     java-version:'17'
+  name:mvn test
+   -run : mvn test
+  name: sonar scan
+    -run : sonar-scanner
+  name:maven build
+   -run: mvn clean package -DskipTests
+  name: upload-artifact
+   -run: mvn deploy -DskipTests
+  name: docker build
+   -run: docker build -t ${app}:${acr-name}.azureacr.io/${tag}
+  name: trivy scan
+   -run: trivy image ${app}:${acr-name}.azureacr.io/${tag}
+  name:azure login
+    -uses: azure/login@v1
+     with:
+      client-id: ${{ secrets.AZURE_CLIENT_ID }}
+      tenat-id:${{ secrets.AZURE_TENANT_ID }}
+      subscription-id:${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  name:docker push
+   -run: docker push ${acr-name}.azureacr.io/${tag}
+  name:deploy to aks
+   -run: az aks get-credentials --resource-group ${aks-resource-group} --name ${aks-cluster-name}
+   -run: kubectl apply -f k8s/deployment.yaml
+   -run: kubectl apply -f k8s/service.yaml
 
 
 
